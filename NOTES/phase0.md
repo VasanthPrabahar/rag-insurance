@@ -32,6 +32,15 @@
   commit, `PROJECT_STATE.md` is the living status doc updated every phase,
   and no RAG logic exists yet — this phase is scaffold and corpus only.
 
+- **Full specimen policies (added in Phase 1 prep)**: the original manifest had
+  no complete policy contract, only guides/forms. Added two full ISO Personal
+  Auto Policy specimens: PP 00 01 06 98 hosted by the Nevada Division of
+  Insurance (doi.nv.gov, 12 pages) and the 2018 edition PP 00 01 09 18 hosted
+  by the Virginia SCC Bureau of Insurance (scc.virginia.gov, 14 pages). Both
+  verified to contain the Definitions section, Parts A-D, exclusions, and
+  General Provisions — i.e. complete contracts, not summaries. (The genuine
+  ISO PAP runs ~12-14 dense pages, not 20+.)
+
 - **Source availability**: TDI, CDI, and NAIC document URLs were all directly
   reachable and served correctly typed PDFs. Arizona DIFI (`difi.az.gov`) sits
   behind a domain-wide Cloudflare bot challenge that blocks plain HTTP clients

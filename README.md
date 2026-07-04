@@ -42,13 +42,13 @@ flowchart TD
 | Phase | Name | Status |
 |-------|------|--------|
 | v0 | Foundation — repo scaffold, tooling, corpus downloader | ✅ done |
-| v1 | Ingestion — parsing, structure-aware chunking | ⬜ planned |
-| v2 | Baseline retrieval — dense (pgvector) | ⬜ planned |
-| v3 | Hybrid retrieval — + sparse/BM25, RRF fusion | ⬜ planned |
-| v4 | Reranking | ⬜ planned |
-| v5 | Grounded generation — Ollama llama3.1:8b, citations | ⬜ planned |
-| v6 | Evaluation harness — golden dataset, eval-gated changes | ⬜ planned |
-| v7 | Final — hardening, packaging, Docker delivery | ⬜ planned |
+| v1 | Naive RAG end to end — fixed-size chunks, dense-only retrieval, grounded generation (the intentionally naive baseline every later phase must beat) | ✅ done |
+| v2 | Evaluation harness — golden dataset, retrieval + answer metrics; changes become eval-gated from here | ⬜ planned |
+| v3 | Measured retrieval upgrades — structure-aware chunking, hybrid (BM25 + dense) with RRF, HNSW indexing | ⬜ planned |
+| v4 | Reranking + citations | ⬜ planned |
+| v5 | Generation quality — prompt iteration, groundedness checks | ⬜ planned |
+| v6 | Hardening — API surface, observability | ⬜ planned |
+| v7 | Final — packaging, Docker delivery | ⬜ planned |
 
 ## Design decisions
 

@@ -1,18 +1,25 @@
 [project]
 name = "rag-insurance"
 version = "0.1.0"
-description = "Add your description here"
+description = "Auto insurance RAG built from scratch, measured at every step"
 readme = "README.md"
 authors = [
     { name = "VasanthPrabahar", email = "vprabah1@asu.edu" }
 ]
 requires-python = ">=3.11"
 dependencies = [
+    "beautifulsoup4>=4.15.0",
     "httpx>=0.28.1",
+    "psycopg[binary]>=3.3.4",
+    "pydantic>=2.13.4",
+    "pymupdf>=1.28.0",
+    "python-dotenv>=1.2.2",
+    "sentence-transformers>=5.6.0",
+    "typer>=0.26.8",
 ]
 
 [project.scripts]
-rag-insurance = "rag_insurance:main"
+rag = "rag_insurance.cli:app"
 
 [build-system]
 requires = ["uv_build>=0.11.26,<0.12.0"]
