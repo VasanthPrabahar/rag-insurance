@@ -93,16 +93,25 @@ DOCUMENTS: list[DocumentMeta] = [
         doc_type="guide",
         filename="az-consumer-guide-credit-scoring.pdf",
     ),
+    # Removed in Phase 2: "AZ 2023 Auto Premium Report" — 233 chunks of
+    # rate-table noise that made up ~60% of the corpus (see NOTES/phase2.md).
     DocumentMeta(
-        name="AZ 2023 Auto Premium Report",
+        name="AZ New Driver's Guide to Auto Insurance",
         url=(
-            "https://web.archive.org/web/20250225200727/"
+            "https://web.archive.org/web/20250613195427/"
             "https://difi.az.gov/sites/default/files/"
-            "2023%20Arizona%20Auto%20Premium%20Report%20(2).pdf"
+            "New%20Driver%27s%20Guide%20to%20Auto%20Insurance_20180618.pdf"
         ),
         state="AZ",
         doc_type="guide",
-        filename="az-2023-auto-premium-report.pdf",
+        filename="az-new-drivers-guide.pdf",
+    ),
+    DocumentMeta(
+        name="TX Automobile Insurance Guide (cb020)",
+        url="https://www.tdi.texas.gov/pubs/consumer/cb020.html",
+        state="TX",
+        doc_type="guide",
+        filename="tx-automobile-insurance-guide-cb020.html",
     ),
     # Full ISO Personal Auto Policy specimens: complete contracts with
     # definitions, Parts A-D, exclusions, and general provisions.

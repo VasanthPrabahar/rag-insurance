@@ -15,11 +15,15 @@ def get_ollama_host() -> str:
     return os.environ.get("OLLAMA_HOST", "http://localhost:11434")
 
 
-def generate(prompt: str, model: str = DEFAULT_MODEL, timeout: float = 300.0) -> str:
-    response = httpx.post(
-        f"{get_ollama_host()}/api/generate",
-        json={"model": model, "prompt": prompt, "stream": False},
-        timeout=timeout,
-    )
+def generate(
+    prompt: str,
+    model: str = DEFAULT_MODEL,
+    timeout: float = 300.0,
+    json_mode: bool = False,
+) -> str:
+    payload: dict = {"model": model, "prompt": prompt, "stream": False}
+    if json_mode:
+        payload["format"] = "json"
+    response = httpx.post(f"{get_ollama_host()}/api/generate", json=payload, timeout=timeout)
     response.raise_for_status()
     return response.json()["response"]

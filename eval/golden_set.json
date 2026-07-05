@@ -1,0 +1,275 @@
+{
+  "description": "Golden evaluation set for the auto-insurance RAG. Questions are grounded in the actual corpus documents. relevant_hint must appear (case- and whitespace-insensitive) in a chunk from a relevant_doc_name for that chunk to count as relevant. out_of_scope items have no relevant docs; correct behavior is refusal.",
+  "items": [
+    {
+      "id": "g01",
+      "question": "If my car is in the shop after a covered loss, will my policy pay for a rental car or other transportation?",
+      "ground_truth_answer": "Yes. Under Part D Transportation Expenses, the policy pays up to $20 per day, to a maximum of $600, for temporary transportation expenses, without a deductible, when a covered auto has a loss covered by Collision or Other Than Collision coverage. For non-theft losses, payment starts once the car is out of use for more than 24 hours.",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "temporary transportation expenses",
+      "category": "lookup",
+      "state": null
+    },
+    {
+      "id": "g02",
+      "question": "Am I covered if my friend drives my car and crashes it?",
+      "ground_truth_answer": "Generally yes. Under Part A of the personal auto policy, 'insured' includes any person using your covered auto, so a friend driving with your permission is covered for liability. Coverage is excluded if the driver lacked a reasonable belief they were entitled to use the car, and a car furnished for someone's regular use raises separate exclusions.",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "any person using \"your covered auto\"",
+      "category": "lookup",
+      "state": null
+    },
+    {
+      "id": "g03",
+      "question": "What counts as an uninsured motor vehicle under a personal auto policy?",
+      "ground_truth_answer": "A land motor vehicle or trailer: (1) with no bodily injury liability bond or policy at the time of the accident; (2) with limits below the financial responsibility minimums of the state where your covered auto is garaged; (3) a hit-and-run vehicle whose operator or owner cannot be identified; or (4) one whose insurer denies coverage or becomes insolvent. It excludes vehicles owned by or available for the regular use of you or a family member, self-insured vehicles, government vehicles, vehicles on rails or crawler treads, off-road vehicles, and vehicles used as a residence.",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "no bodily injury liability bond or policy applies",
+      "category": "lookup",
+      "state": null
+    },
+    {
+      "id": "g04",
+      "question": "What is a deductible?",
+      "ground_truth_answer": "A deductible is the amount of a loss that the insured is responsible for paying out of pocket; the insurer pays covered amounts above it. Choosing a higher deductible usually lowers your premium. Example: with a $500 comprehensive deductible and $1,500 of storm damage, you pay $500 and the insurer pays $1,000.",
+      "relevant_doc_names": ["CA Automobile Insurance Consumer Guide (2025)"],
+      "relevant_hint": "the amount of loss which the insured is responsible to pay",
+      "category": "lookup",
+      "state": null
+    },
+    {
+      "id": "g05",
+      "question": "Does an auto policy pay anything toward bail bonds if I'm arrested after an accident?",
+      "ground_truth_answer": "Yes. As a supplementary payment under Part A, the policy pays up to $250 for the cost of bail bonds required because of an accident, including related traffic law violations, as long as the accident results in bodily injury or property damage covered by the policy. This is in addition to the limit of liability.",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "bail bonds",
+      "category": "lookup",
+      "state": null
+    },
+    {
+      "id": "g06",
+      "question": "Is a cracked windshield covered under collision or comprehensive?",
+      "ground_truth_answer": "Breakage of glass is treated as an 'other than collision' (comprehensive) loss under Part D. However, if the glass breakage is caused by a collision, the insured may elect to have it treated as a collision loss (typically to avoid two deductibles).",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "breakage of glass",
+      "category": "lookup",
+      "state": null
+    },
+    {
+      "id": "g07",
+      "question": "Does insurance pay if I hit a deer with my car?",
+      "ground_truth_answer": "Yes, if you carry Other Than Collision (comprehensive) coverage. The personal auto policy lists 'contact with bird or animal' as a loss considered other than collision, so hitting a deer is covered under comprehensive, not collision.",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "contact with bird or animal",
+      "category": "lookup",
+      "state": null
+    },
+    {
+      "id": "g08",
+      "question": "What is an insurance score and what do companies use it for?",
+      "ground_truth_answer": "An insurance score is a number developed from a consumer's credit information, used by insurance companies to predict the likelihood that an applicant or policyholder will file claims. Companies use it to underwrite (decide whether to issue or renew a policy) and to rate (decide what premium to charge).",
+      "relevant_doc_names": ["AZ Consumer Guide to How Insurers Use Credit Information"],
+      "relevant_hint": "predict the likelihood",
+      "category": "lookup",
+      "state": null
+    },
+    {
+      "id": "g09",
+      "question": "I bought an additional car. How long do I have to ask my insurer to cover it?",
+      "ground_truth_answer": "For a newly acquired auto that is in addition to vehicles on the policy, you must ask the insurer to cover it within 14 days after you become the owner for most coverages. If it replaces a listed vehicle, coverage applies without asking. For collision or other-than-collision coverage, the window is 14 days if that coverage already applies to at least one auto, otherwise 4 days (with a $500 deductible for losses before you ask).",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "14 days after you become the owner",
+      "category": "lookup",
+      "state": null
+    },
+    {
+      "id": "g10",
+      "question": "What is GAP insurance?",
+      "ground_truth_answer": "Guaranteed Auto Protection (GAP) insurance covers the gap when your car is damaged and its market value is less than what you owe on the loan or lease. Regular auto insurance pays based on market value and does not pay off the loan balance; auto dealers and lenders may offer GAP insurance for this purpose.",
+      "relevant_doc_names": ["NAIC A Consumer's Guide to Auto Insurance", "CA Automobile Insurance Consumer Guide (2025)"],
+      "relevant_hint": "market value is less than what you owe",
+      "category": "lookup",
+      "state": null
+    },
+    {
+      "id": "g11",
+      "question": "What does personal injury protection (PIP) cover?",
+      "ground_truth_answer": "Personal Injury Protection pays to treat injuries to you and your passengers regardless of who is at fault. Available in no-fault states, PIP can also cover lost wages and funeral costs.",
+      "relevant_doc_names": ["NAIC A Consumer's Guide to Auto Insurance", "NAIC Consumer Shopping Tool for Auto Insurance"],
+      "relevant_hint": "personal injury protection",
+      "category": "lookup",
+      "state": null
+    },
+    {
+      "id": "g12",
+      "question": "What does rental reimbursement coverage do?",
+      "ground_truth_answer": "Rental reimbursement coverage pays for you to rent a car when yours is stolen or being repaired after an accident. It pays a limited daily dollar amount for a limited number of days; some policies also cover taxis or ride-hailing services.",
+      "relevant_doc_names": ["TX Auto Insurance Shopping Guide", "NAIC A Shopping Tool for Auto Insurance"],
+      "relevant_hint": "rental reimbursement",
+      "category": "lookup",
+      "state": null
+    },
+    {
+      "id": "g13",
+      "question": "My car was stolen. When does coverage for temporary transportation expenses start, and how much will I get?",
+      "ground_truth_answer": "For a total theft, transportation expenses are paid only for the period beginning 48 hours after the theft and ending when the car is returned to use or the insurer pays for the loss. The policy pays up to $20 per day, to a maximum of $600, with no deductible.",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "48 hours after the theft",
+      "category": "multi_hop",
+      "state": null
+    },
+    {
+      "id": "g14",
+      "question": "My own car is being repaired and I'm driving a loaner from the shop. Is the loaner covered under my policy?",
+      "ground_truth_answer": "Yes. An auto you do not own, used as a temporary substitute for your covered auto while it is out of normal use because of breakdown, repair, servicing, loss, or destruction, qualifies as 'your covered auto' for liability purposes, and as a 'non-owned auto' for physical damage, where it receives the broadest coverage applicable to any declared vehicle.",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "temporary substitute",
+      "category": "multi_hop",
+      "state": null
+    },
+    {
+      "id": "g15",
+      "question": "The driver who hit me had insurance, but their insurance company went bankrupt. Does my uninsured motorist coverage apply?",
+      "ground_truth_answer": "Yes. The definition of 'uninsured motor vehicle' includes a vehicle with a liability policy whose insurer denies coverage or is or becomes insolvent, so your uninsured motorist coverage steps in.",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "becomes insolvent",
+      "category": "multi_hop",
+      "state": null
+    },
+    {
+      "id": "g16",
+      "question": "My aftermarket stereo was stolen out of my car. Is it covered, and is there a limit?",
+      "ground_truth_answer": "Sound-reproduction equipment is excluded unless it is permanently installed in the auto (or removable from a permanently installed housing, powered by the car's electrical system, and in the car at the time of loss). If covered but installed somewhere other than the manufacturer's normal location, the limit is $1,000.",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "reproduction of sound",
+      "category": "multi_hop",
+      "state": null
+    },
+    {
+      "id": "g17",
+      "question": "I crashed while driving in another state whose minimum liability limits are higher than my policy's limits. Which limits apply?",
+      "ground_truth_answer": "Under the Out of State Coverage provision, if the accident state has a financial responsibility law with higher limits than your Declarations, the policy provides the higher specified limits. If the state requires nonresidents to carry insurance, the policy provides at least the required minimum amounts and types of coverage.",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "higher specified limit",
+      "category": "multi_hop",
+      "state": null
+    },
+    {
+      "id": "g18",
+      "question": "I hold two auto policies with the same insurance company. Can I collect under both policies for a single accident?",
+      "ground_truth_answer": "No. Under the Two or More Auto Policies provision, if multiple policies issued by the same insurer apply to the same accident, the maximum limit of liability under all of them is the highest applicable limit under any one policy — the limits do not stack.",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "highest applicable limit",
+      "category": "multi_hop",
+      "state": null
+    },
+    {
+      "id": "g19",
+      "question": "What are the minimum liability coverage amounts required by Texas law?",
+      "ground_truth_answer": "Texas requires at least $30,000 of coverage for injuries per person, up to a total of $60,000 per accident, and $25,000 of coverage for property damage — known as 30/60/25 coverage.",
+      "relevant_doc_names": ["TX Automobile Insurance Guide (cb020)", "TX Auto Insurance Comparison Worksheet"],
+      "relevant_hint": "30/60/25",
+      "category": "state_specific",
+      "state": "TX"
+    },
+    {
+      "id": "g20",
+      "question": "Who qualifies as a Good Driver in California, and what discount must they receive?",
+      "ground_truth_answer": "A Good Driver is a person licensed for at least three consecutive years with no more than one point on their driving record. Every automobile insurer must offer Good Driver coverage, and a Good Driver's rates must be at least 20% lower than what a non-Good Driver would pay at the same company.",
+      "relevant_doc_names": ["CA Automobile Insurance Consumer Guide (2025)"],
+      "relevant_hint": "licensed for at least three consecutive years",
+      "category": "state_specific",
+      "state": "CA"
+    },
+    {
+      "id": "g21",
+      "question": "What is the coverage limit for uninsured motorist property damage (UMPD) in California?",
+      "ground_truth_answer": "The UMPD limit is $3,500. It pays for damage to your car from an accident with an at-fault uninsured driver, applies when you do not have collision coverage, and only pays if the uninsured driver is identified.",
+      "relevant_doc_names": ["CA Automobile Insurance Consumer Guide (2025)"],
+      "relevant_hint": "$3,500",
+      "category": "state_specific",
+      "state": "CA"
+    },
+    {
+      "id": "g22",
+      "question": "In California, can I satisfy the financial responsibility law without buying an insurance policy?",
+      "ground_truth_answer": "Yes. Besides buying liability insurance from an authorized insurer, you can make a cash deposit of $35,000 with the DMV or obtain a $35,000 surety bond from a company licensed in California. Evidence of financial responsibility must be carried in the vehicle at all times.",
+      "relevant_doc_names": ["CA Automobile Insurance Consumer Guide (2025)"],
+      "relevant_hint": "cash deposit of $35,000",
+      "category": "state_specific",
+      "state": "CA"
+    },
+    {
+      "id": "g23",
+      "question": "What kinds of credit information are Arizona insurers prohibited from using in an insurance score?",
+      "ground_truth_answer": "Arizona law prohibits using: absence of (or inability to determine) credit history; collection accounts with a medical industry code; bankruptcies or lien satisfactions more than 7 years old; total available credit (though debt-to-available-credit ratio is allowed); and any score derived from income, gender, address, zip code, ethnic group, religion, marital status, or nationality.",
+      "relevant_doc_names": ["AZ Consumer Guide to How Insurers Use Credit Information"],
+      "relevant_hint": "medical industry code",
+      "category": "state_specific",
+      "state": "AZ"
+    },
+    {
+      "id": "g24",
+      "question": "What penalties can an Arizona driver face for driving without insurance?",
+      "ground_truth_answer": "You could be ticketed and fined between $500 and $1,000, your vehicle registration and driver's license could be suspended, and your vehicle could be impounded. If you cause an accident you could be sued, and most insurers later charge higher rates to previously uninsured drivers.",
+      "relevant_doc_names": ["AZ New Driver's Guide to Auto Insurance"],
+      "relevant_hint": "fined between $500 and $1,000",
+      "category": "state_specific",
+      "state": "AZ"
+    },
+    {
+      "id": "g25",
+      "question": "What does boat insurance cover, and how much does it typically cost?",
+      "ground_truth_answer": "REFUSAL — the corpus covers auto insurance only; boat insurance is out of scope.",
+      "relevant_doc_names": [],
+      "relevant_hint": null,
+      "category": "out_of_scope",
+      "state": null
+    },
+    {
+      "id": "g26",
+      "question": "What's the best health insurance plan for a family of four?",
+      "ground_truth_answer": "REFUSAL — health insurance is out of scope for this auto-insurance corpus.",
+      "relevant_doc_names": [],
+      "relevant_hint": null,
+      "category": "out_of_scope",
+      "state": null
+    },
+    {
+      "id": "g27",
+      "question": "Which auto insurance company is the best one to buy from?",
+      "ground_truth_answer": "REFUSAL — the corpus explains how to compare companies but does not (and cannot) name a best company.",
+      "relevant_doc_names": [],
+      "relevant_hint": null,
+      "category": "out_of_scope",
+      "state": null
+    },
+    {
+      "id": "g28",
+      "question": "What is the average monthly cost of car insurance in the United States?",
+      "ground_truth_answer": "REFUSAL — no document in the corpus states a national average premium.",
+      "relevant_doc_names": [],
+      "relevant_hint": null,
+      "category": "out_of_scope",
+      "state": null
+    },
+    {
+      "id": "g29",
+      "question": "My policy says the company pays all defense costs, so they have to keep defending me in court forever no matter what, right?",
+      "ground_truth_answer": "No. The insurer pays defense costs in addition to the limit of liability, but its duty to settle or defend ends when the limit of liability has been exhausted by payment of judgments or settlements, and there is no duty to defend claims not covered by the policy.",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "duty to settle or defend ends",
+      "category": "adversarial",
+      "state": null
+    },
+    {
+      "id": "g30",
+      "question": "Once I've paid my premium, my insurance company can't cancel my policy mid-term for any reason, correct?",
+      "ground_truth_answer": "Incorrect. Even mid-term, the insurer can cancel with notice — for nonpayment of premium, for suspension or revocation of the driver's license of you or a household/customary driver, or if the policy was obtained through material misrepresentation (after 60 days in force, these are the only grounds).",
+      "relevant_doc_names": ["ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": "material misrepresentation",
+      "category": "adversarial",
+      "state": null
+    }
+  ]
+}

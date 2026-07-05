@@ -1,5 +1,7 @@
 # Auto Insurance RAG — built from scratch, measured at every step
 
+[![eval](https://github.com/VasanthPrabahar/rag-insurance/actions/workflows/eval.yml/badge.svg)](https://github.com/VasanthPrabahar/rag-insurance/actions/workflows/eval.yml)
+
 ## Vision
 
 Insurance policies are exactly the kind of document naive RAG breaks on: deeply
@@ -43,12 +45,12 @@ flowchart TD
 |-------|------|--------|
 | v0 | Foundation — repo scaffold, tooling, corpus downloader | ✅ done |
 | v1 | Naive RAG end to end — fixed-size chunks, dense-only retrieval, grounded generation (the intentionally naive baseline every later phase must beat) | ✅ done |
-| v2 | Evaluation harness — golden dataset, retrieval + answer metrics; changes become eval-gated from here | ⬜ planned |
-| v3 | Measured retrieval upgrades — structure-aware chunking, hybrid (BM25 + dense) with RRF, HNSW indexing | ⬜ planned |
-| v4 | Reranking + citations | ⬜ planned |
-| v5 | Generation quality — prompt iteration, groundedness checks | ⬜ planned |
-| v6 | Hardening — API surface, observability | ⬜ planned |
-| v7 | Final — packaging, Docker delivery | ⬜ planned |
+| v2 | Evaluation harness + corpus rebalance — golden dataset, retrieval + judge metrics, CI; changes become eval-gated from here | ✅ done |
+| v3 | Retrieval upgrades — structure-aware chunking, hybrid BM25/dense with RRF, cross-encoder reranking, HNSW | ⬜ planned |
+| v4 | Query rewriting + metadata filtering + citation-grounded answers with refusal | ⬜ planned |
+| v5 | Delivery — FastAPI service, Airflow ingestion DAG, full Docker delivery | ⬜ planned |
+| v6 | Agentic layer — LangChain/LangGraph router + query decomposition, with honest latency comparison | ⬜ planned |
+| v7 | Polish — demo UI, final README | ⬜ planned |
 
 ## Design decisions
 
@@ -70,10 +72,10 @@ src/rag_insurance/
     ingest/       # parsing, chunking
     retrieval/    # dense + sparse retrieval, fusion, reranking
     generation/   # prompting, grounded answer generation
-    eval/         # eval harness code
+    eval/         # eval harness code (metrics, LLM judge)
 scripts/          # one-off / operational scripts (e.g. download_data.py)
 data/raw/         # downloaded source corpus (gitignored, see .gitkeep)
-eval/             # golden dataset (added in v6)
+eval/             # golden dataset + eval results (added in v2)
 NOTES/            # phase-by-phase learning notes
 ```
 

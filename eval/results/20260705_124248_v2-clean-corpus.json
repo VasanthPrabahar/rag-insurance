@@ -1,0 +1,1200 @@
+{
+  "tag": "v2-clean-corpus",
+  "timestamp": "20260705_124248",
+  "k": 5,
+  "skip_llm": false,
+  "summary": {
+    "overall": {
+      "n": 30,
+      "recall_at_k": 0.5385,
+      "precision_at_k": 0.1692,
+      "mrr": 0.4244,
+      "faithfulness": 0.8967,
+      "correctness": 0.6667
+    },
+    "per_category": {
+      "adversarial": {
+        "n": 2,
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.3,
+        "mrr": 0.75,
+        "faithfulness": 0.9,
+        "correctness": 0.35
+      },
+      "lookup": {
+        "n": 12,
+        "recall_at_k": 0.4167,
+        "precision_at_k": 0.15,
+        "mrr": 0.375,
+        "faithfulness": 0.825,
+        "correctness": 0.675
+      },
+      "multi_hop": {
+        "n": 6,
+        "recall_at_k": 0.5,
+        "precision_at_k": 0.2,
+        "mrr": 0.2833,
+        "faithfulness": 0.9333,
+        "correctness": 0.45
+      },
+      "out_of_scope": {
+        "n": 4,
+        "recall_at_k": null,
+        "precision_at_k": null,
+        "mrr": null,
+        "faithfulness": 1.0,
+        "correctness": 1.0
+      },
+      "state_specific": {
+        "n": 6,
+        "recall_at_k": 0.6667,
+        "precision_at_k": 0.1333,
+        "mrr": 0.5556,
+        "faithfulness": 0.9333,
+        "correctness": 0.75
+      }
+    }
+  },
+  "items": [
+    {
+      "id": "g01",
+      "category": "lookup",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "answer": "According to the context, it appears that there are different options available to cover your expenses while your car is being repaired. Specifically:\n\n* You can buy rental reimbursement insurance, which pays for car rental when your own car is being repaired after a covered accident.\n* You can also purchase other types of coverage, such as towing and road service or rental agency liability policies.\n\nHowever, the context does not explicitly state whether these options are automatically included in your policy or if you need to specifically opt-in for them.\n\nIt's also worth noting that the Rental Reimbursement pays for car rental when your own car is being repaired after a covered accident, which implies that there might be some specific conditions or requirements for this coverage to apply.",
+      "refused": false,
+      "faithfulness": 0.7,
+      "correctness": 0.6,
+      "retrieved": [
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 11,
+          "score": 0.5855
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": 0.5588
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 2,
+          "score": 0.555
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 5,
+          "score": 0.5466
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 11,
+          "score": 0.5459
+        }
+      ]
+    },
+    {
+      "id": "g02",
+      "category": "lookup",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "answer": "According to the provided context in \"CA Shopping for Auto Insurance Guide | CA | guide | chunk 8\", it's stated:\n\n\"A: It\u2019s not a good idea to let your friends borrow your car. Most standard policies will cover a friend who has borrowed your car; however, if a friend borrows your car on a regular basis, the insurance company most likely will not pay for the loss.\"\n\nSo, based on this information, it appears that:\n\n\"If a friend borrows your car on a regular basis... the insurance company most likely will not pay for the loss.\"\n\nHowever, there is no clear answer to what happens if your friend drives your car and crashes it in an occasional or one-time situation.\n\nFrom \"AZ New Driver's Guide to Auto Insurance | AZ | guide | chunk 0\", we have:\n\n\"Exchange information with the other driver involved. Important information you will need includes: ... The other driver\u2019s insurance company name and policy number (look at their insurance card)\"\n\nThis suggests that if your friend is driving your car and crashes it, they should exchange information with any other drivers or parties involved in the accident.\n\nGiven these two pieces of information, a possible answer could be:\n\n\"Most standard policies will cover a friend who has borrowed your car, but the specifics may vary depending on the insurance company's response. You should check your policy to see how it handles this situation.\"\n\nBut I'll provide a more concise answer as requested:\n\n\"I don't know based on the provided documents.\"",
+      "refused": true,
+      "faithfulness": 0.5,
+      "correctness": 0.5,
+      "retrieved": [
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 8,
+          "score": 0.6385
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 0,
+          "score": 0.5441
+        },
+        {
+          "doc_name": "AZ New Driver's Guide to Auto Insurance",
+          "chunk_index": 1,
+          "score": 0.5428
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 11,
+          "score": 0.5345
+        },
+        {
+          "doc_name": "AZ New Driver's Guide to Auto Insurance",
+          "chunk_index": 0,
+          "score": 0.5341
+        }
+      ]
+    },
+    {
+      "id": "g03",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "answer": "According to the provided documents, an \"uninsured motor vehicle\" means a land motor vehicle or trailer of any type:\n\n1. To which no bodily injury liability bond or policy applies at the time of the accident.\n2. To which a bodily injury liability bond or policy applies at the time of the accident, but its limit for bodily injury liability must be less than the minimum limit for bodily injury liability specified by the financial responsibility law of the state in which \"your covered auto\" is principally garaged.\n3. Which is a hit-and-run vehicle whose operator or owner cannot be identified and which hits: \n    a. You or any \"family member\".\n    b. A vehicle which you or any \"family member\" are \"occupying\"; or\n    c. \"Your covered auto\".\n4. To which a bodily injury liability bond or policy applies at the time of the accident but the bonding or insuring company:\n    a. Denies coverage; or\n    b. Is or becomes insolvent.\n\nHowever, it does not include any vehicle or equipment:\n\n1. Owned by or furnished or available for the regular use of you or any \"family member\".\n2. Owned or operated by a self-insurer under any applicable motor vehicle law, except a self-insurer which is or becomes insolvent.\n3. Owned by any governmental unit or agency.\n4. Operated on rails or crawler treads.\n5. Designed mainly for use off public roads while not on public roads.\n6. While located for use as a residence or premises.\n\nTherefore, an uninsured motor vehicle under a personal auto policy is typically a vehicle that lacks adequate liability insurance coverage at the time of an accident, does not meet state minimum insurance requirements, or meets certain exclusion criteria.",
+      "refused": false,
+      "faithfulness": 1.0,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 10,
+          "score": 0.7297
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 9,
+          "score": 0.7189
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 10,
+          "score": 0.7025
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 11,
+          "score": 0.6996
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 11,
+          "score": 0.694
+        }
+      ]
+    },
+    {
+      "id": "g04",
+      "category": "lookup",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "answer": "A deductible is \"the amount of the claim that is your responsibility\" (from chunk 3 and 4). It's also mentioned in A Note about Deductibles as \"the amount you will have to pay to repair your automobile\". \n\nAdditionally, it's specified in both the ISO Personal Auto Policy specimens that a deductible will apply to losses or damages. For example, from ISO PP 00 01 09 18 (Virginia SCC), \"We will pay for loss to 'your covered auto' caused by:... minus any applicable deductible shown in the Declarations.\"",
+      "refused": false,
+      "faithfulness": 0.8,
+      "correctness": 0.6,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": 0.4583
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 3,
+          "score": 0.4141
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 14,
+          "score": 0.4039
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 14,
+          "score": 0.3853
+        },
+        {
+          "doc_name": "TX Auto Insurance Comparison Worksheet",
+          "chunk_index": 1,
+          "score": 0.3784
+        }
+      ]
+    },
+    {
+      "id": "g05",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "answer": "According to the ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC) | VA | policy | chunk 3, SUPPLEMENTARY PAYMENTS:\n\n1. Up to $250 for the cost of bail bonds required\nbecause of an accident, including related traffic law violations. The accident must result in\n\"bodily injury\" or \"property damage\" covered under this Policy.\n\nSo, yes, an auto policy may pay up to $250 toward bail bonds if you're arrested after an accident that results in bodily injury or property damage covered by the policy.",
+      "refused": false,
+      "faithfulness": 1.0,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 3,
+          "score": 0.6389
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 18,
+          "score": 0.5142
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 10,
+          "score": 0.4773
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 21,
+          "score": 0.4619
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 5,
+          "score": 0.4496
+        }
+      ]
+    },
+    {
+      "id": "g06",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "answer": "Based on the provided context, breakage of glass is considered other than \"collision\", but if it's caused by a \"collision\", you may elect to have it considered a loss caused by \"collision\". Since a cracked windshield typically occurs due to non-collision events (e.g., a falling object, a rock, or another type of external force), it would generally be covered under comprehensive coverage. However, if the crack is caused by a collision (e.g., hitting a pothole or another vehicle), you may choose to have it treated as a collision loss.\n\nTherefore, without more specific information about the cause of the cracked windshield, I'd say it's likely to be covered under comprehensive coverage, but there might be an option to elect for it to be considered a collision loss if caused by a collision event.",
+      "refused": false,
+      "faithfulness": 0.8,
+      "correctness": 0.7,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 14,
+          "score": 0.4926
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 14,
+          "score": 0.4396
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 13,
+          "score": 0.4139
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": 0.4009
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 2,
+          "score": 0.3861
+        }
+      ]
+    },
+    {
+      "id": "g07",
+      "category": "lookup",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "answer": "I don't know based on the provided documents.",
+      "refused": true,
+      "faithfulness": 1.0,
+      "correctness": 0.0,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": 0.5884
+        },
+        {
+          "doc_name": "AZ New Driver's Guide to Auto Insurance",
+          "chunk_index": 1,
+          "score": 0.5577
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 8,
+          "score": 0.5446
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 0,
+          "score": 0.5416
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 7,
+          "score": 0.537
+        }
+      ]
+    },
+    {
+      "id": "g08",
+      "category": "lookup",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "answer": "According to the context:\n\nAn insurance credit score is a number based on various financial, credit, and risk factors. Some companies offer discounts to consumers who have higher insurance credit scores.\n\nInsurers may use an insurance credit score as a rating factor, if state law allows.\n\nArizona law requires an insurance company to tell you if it has taken an \"adverse action\" against you because of your credit history, including the specific reason and how to obtain a copy of your credit report.\n\nHowever, insurers do not have to share with consumers what their actual insurance score is.",
+      "refused": false,
+      "faithfulness": 0.8,
+      "correctness": 0.6,
+      "retrieved": [
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 8,
+          "score": 0.6873
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 9,
+          "score": 0.6005
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 11,
+          "score": 0.567
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 7,
+          "score": 0.5345
+        },
+        {
+          "doc_name": "AZ Consumer Guide to How Insurers Use Credit Information",
+          "chunk_index": 2,
+          "score": 0.5303
+        }
+      ]
+    },
+    {
+      "id": "g09",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "answer": "According to the provided documents, if your Declarations indicates that Other Than Collision Coverage applies to at least one auto, you must ask your insurer to insure the newly acquired auto within 14 days after becoming its owner.\n\nIf your Declarations does not indicate that Other Than Collision Coverage applies to at least one auto, you have four days after becoming its owner to ask your insurer to insure it.",
+      "refused": false,
+      "faithfulness": 0.8,
+      "correctness": 0.4,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 2,
+          "score": 0.6456
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 11,
+          "score": 0.6149
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 2,
+          "score": 0.6037
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 23,
+          "score": 0.5714
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 23,
+          "score": 0.5663
+        }
+      ]
+    },
+    {
+      "id": "g10",
+      "category": "lookup",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "answer": "Guaranteed Asset Protection (GAP) insurance, also known as loan/lease coverage or debt cancellation, may help pay off what you owe if your car's value is less than what you still owe on it after an accident. It provides protection whether the accident is your fault or someone else's and can be purchased from a lender, dealer, or insurance company or agent.",
+      "refused": false,
+      "faithfulness": 0.9,
+      "correctness": 0.8,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 5,
+          "score": 0.5562
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 1,
+          "score": 0.5033
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 7,
+          "score": 0.4968
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 7,
+          "score": 0.484
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 11,
+          "score": 0.4644
+        }
+      ]
+    },
+    {
+      "id": "g11",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 0.5,
+      "answer": "According to the context, Personal Injury Protection (PIP) coverage pays to treat injuries to you and your passengers, but also can cover such things as lost wages and funeral costs.",
+      "refused": false,
+      "faithfulness": 0.9,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 3,
+          "score": 0.7237
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 6,
+          "score": 0.7013
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 3,
+          "score": 0.6915
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 1,
+          "score": 0.675
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 5,
+          "score": 0.4813
+        }
+      ]
+    },
+    {
+      "id": "g12",
+      "category": "lookup",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "answer": "Rental reimbursement coverage pays for car rental when your own car is being repaired after a covered accident (from CA Automobile Insurance Consumer Guide). It also says that this type of coverage can be purchased, and you should ask your agent if you need it.",
+      "refused": false,
+      "faithfulness": 0.7,
+      "correctness": 0.9,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 5,
+          "score": 0.5314
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": 0.5155
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 5,
+          "score": 0.4878
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 2,
+          "score": 0.4765
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 12,
+          "score": 0.4739
+        }
+      ]
+    },
+    {
+      "id": "g13",
+      "category": "multi_hop",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.2,
+      "answer": "Based on the provided context, it appears that there are two sections related to your question:\n\n1. From [ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC) | VA | policy | chunk 16]:\n\"If you experience a loss due to theft of 'your covered auto', we will pay only expenses incurred during the period:\na. Beginning 48 hours after the theft; and\nb. Ending when your covered auto is returned to use or we pay for its loss.\n2. Other than theft of a 'your covered auto' or a 'non-owned auto', we will pay only expenses beginning when the auto is withdrawn from use for more than 24 hours.\"\n\nThis suggests that coverage for temporary transportation expenses starts:\n\n* If your car was stolen, it begins 48 hours after the theft.\n* For other types of losses (not theft), it begins after 24 hours.\n\nAs for how much you will get, the text does not provide specific information. However, it mentions that our payment \"will be limited to that period of time reasonably required to repair or replace the 'your covered auto' or the 'non-owned auto'\".\n\nTo answer your question in a concise manner:\n\nCoverage for temporary transportation expenses starts 48 hours after theft or 24 hours after withdrawal from use. The amount you will get is not specified, but it will be limited to the period reasonably required to repair or replace your car.",
+      "refused": false,
+      "faithfulness": 0.8,
+      "correctness": 0.7,
+      "retrieved": [
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": 0.597
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 5,
+          "score": 0.5725
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 2,
+          "score": 0.5483
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 2,
+          "score": 0.5478
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 16,
+          "score": 0.5452
+        }
+      ]
+    },
+    {
+      "id": "g14",
+      "category": "multi_hop",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "answer": "I don't know based on the provided documents.",
+      "refused": true,
+      "faithfulness": 1.0,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 22,
+          "score": 0.5536
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 11,
+          "score": 0.5289
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 3,
+          "score": 0.5229
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 23,
+          "score": 0.5139
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 5,
+          "score": 0.5138
+        }
+      ]
+    },
+    {
+      "id": "g15",
+      "category": "multi_hop",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "answer": "Based on the provided context, I would answer:\n\n\"I don't know based on the provided documents.\"\n\nThe context does not specify what happens if the at-fault driver's insurance company goes bankrupt. However, it does mention Uninsured Motorist Coverage (UMC) which applies when an uninsured or underinsured driver is involved in an accident. Since the driver who hit you had insurance but their company went bankrupt, it seems like this situation may not fit exactly into the UMC category.",
+      "refused": true,
+      "faithfulness": 1.0,
+      "correctness": 0.0,
+      "retrieved": [
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 12,
+          "score": 0.6717
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 6,
+          "score": 0.668
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 11,
+          "score": 0.6641
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": 0.6563
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 11,
+          "score": 0.639
+        }
+      ]
+    },
+    {
+      "id": "g16",
+      "category": "multi_hop",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "answer": "I don't know based on the provided documents.",
+      "refused": true,
+      "faithfulness": 1.0,
+      "correctness": 0.0,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 14,
+          "score": 0.4218
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 23,
+          "score": 0.4216
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 17,
+          "score": 0.4128
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 16,
+          "score": 0.4118
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 17,
+          "score": 0.4103
+        }
+      ]
+    },
+    {
+      "id": "g17",
+      "category": "multi_hop",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "answer": "According to the context, under \"OUT OF STATE COVERAGE\" (ISO Personal Auto Policy specimen PP 00 01 09 18), if an auto accident occurs in a state or province with a financial responsibility law specifying limits of liability for bodily injury or property damage higher than the limit shown in the Declarations, your policy will provide the higher specified limit. \n\nTherefore, since the minimum liability limits in the other state are higher than your policy's limits, the higher limits of the other state would apply.",
+      "refused": false,
+      "faithfulness": 1.0,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 6,
+          "score": 0.7019
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 2,
+          "score": 0.6894
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 6,
+          "score": 0.686
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 12,
+          "score": 0.6278
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 3,
+          "score": 0.6038
+        }
+      ]
+    },
+    {
+      "id": "g18",
+      "category": "multi_hop",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.6,
+      "mrr": 0.5,
+      "answer": "I don't know based on the provided documents.\n\nHowever, according to [ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC) | VA | policy | chunk 12], if there is other applicable insurance available under one or more policies or provisions of coverage that is similar to the insurance provided under this Part of the Policy: \"Any recovery for damages under all such policies or provisions of coverage may equal but not exceed the highest applicable limit for any one vehicle under any insurance providing coverage on either a primary or excess basis.\"\n\nBut there's no clear answer if you can collect under both policies.",
+      "refused": true,
+      "faithfulness": 0.8,
+      "correctness": 0.0,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 9,
+          "score": 0.6021
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 23,
+          "score": 0.5787
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 11,
+          "score": 0.5615
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 11,
+          "score": 0.56
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 12,
+          "score": 0.5596
+        }
+      ]
+    },
+    {
+      "id": "g19",
+      "category": "state_specific",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "answer": "I don't know based on the provided documents. However, according to the NAIC A Shopping Tool for Auto Insurance guide (chunk 2), it is recommended to check with your state Department of Motor Vehicles or Department of Insurance to learn what your state requires. The document does not provide specific information about the minimum liability coverage amounts required by Texas law.\n\nHowever, it can be inferred from the Texas Automobile Insurance Guide (cb020) (chunk 1) that the guide mentions that \"crashes happen, even to the best drivers\" and advises to buy as much liability coverage as you can reasonably afford. This implies that there are minimum requirements, but they are not specified in this document.\n\nTo find the answer, one would need to consult with the Texas Department of Motor Vehicles or the Texas Department of Insurance for more information.",
+      "refused": true,
+      "faithfulness": 0.8,
+      "correctness": 0.2,
+      "retrieved": [
+        {
+          "doc_name": "TX Auto Insurance Comparison Worksheet",
+          "chunk_index": 0,
+          "score": 0.6285
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 2,
+          "score": 0.5966
+        },
+        {
+          "doc_name": "TX Adopted Rule: Named-Driver Auto Policy Disclosure (28 TAC 5.208)",
+          "chunk_index": 4,
+          "score": 0.5856
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 1,
+          "score": 0.5815
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 11,
+          "score": 0.5792
+        }
+      ]
+    },
+    {
+      "id": "g20",
+      "category": "state_specific",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "answer": "I don't know based on the provided documents.",
+      "refused": true,
+      "faithfulness": 1.0,
+      "correctness": 0.5,
+      "retrieved": [
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 9,
+          "score": 0.6435
+        },
+        {
+          "doc_name": "CA Low Cost Automobile Insurance Program Pamphlet",
+          "chunk_index": 0,
+          "score": 0.5695
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 2,
+          "score": 0.5226
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 0,
+          "score": 0.5171
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 0,
+          "score": 0.5056
+        }
+      ]
+    },
+    {
+      "id": "g21",
+      "category": "state_specific",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "answer": "$3,500. This only pays if the uninsured driver is identified.",
+      "refused": false,
+      "faithfulness": 1.0,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 4,
+          "score": 0.6812
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 11,
+          "score": 0.6399
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 2,
+          "score": 0.623
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 6,
+          "score": 0.616
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 9,
+          "score": 0.6157
+        }
+      ]
+    },
+    {
+      "id": "g22",
+      "category": "state_specific",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.3333333333333333,
+      "answer": "According to the CA Automobile Insurance Consumer Guide (2025), there are three ways to accomplish financial responsibility:\n\n\u2022 Obtain automobile liability insurance from an insurance company authorized to do business in California.\n\u2022 Make a cash deposit of $35,000 with the Department of Motor Vehicles (DMV).\n\u2022 Obtain a surety bond for $35,000 from an insurance company licensed to do business in California.\n\nSo, yes, you can satisfy the financial responsibility law without buying an insurance policy by making a cash deposit or obtaining a surety bond.",
+      "refused": false,
+      "faithfulness": 1.0,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 0,
+          "score": 0.7213
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 0,
+          "score": 0.6338
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 3,
+          "score": 0.6037
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 9,
+          "score": 0.589
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 7,
+          "score": 0.5872
+        }
+      ]
+    },
+    {
+      "id": "g23",
+      "category": "state_specific",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "answer": "According to section 5 of the AZ Consumer Guide to How Insurers Use Credit Information, Arizona law prohibits insurance companies from using the following types of credit history to calculate an insurance score:\n\n* The absence of or inability to determine a person's credit history\n* Collection accounts identified with a medical industry code\n* A bankruptcy or lien satisfaction that is more than 7 years old\n* The consumer's total line of available credit (except it can consider the ratio of the amount of debt to the amount of available credit)\n* An insurance score that is derived from the income, gender, address, zip code, ethnic group, religion, marital status or nationality of the consumer.",
+      "refused": false,
+      "faithfulness": 0.8,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "AZ Consumer Guide to How Insurers Use Credit Information",
+          "chunk_index": 1,
+          "score": 0.7591
+        },
+        {
+          "doc_name": "AZ Consumer Guide to How Insurers Use Credit Information",
+          "chunk_index": 2,
+          "score": 0.6617
+        },
+        {
+          "doc_name": "AZ Consumer Guide to How Insurers Use Credit Information",
+          "chunk_index": 0,
+          "score": 0.6031
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 8,
+          "score": 0.5462
+        },
+        {
+          "doc_name": "AZ New Driver's Guide to Auto Insurance",
+          "chunk_index": 2,
+          "score": 0.5444
+        }
+      ]
+    },
+    {
+      "id": "g24",
+      "category": "state_specific",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "answer": "According to the provided documents, specifically the \"AZ New Driver's Guide to Auto Insurance\" (chunk 1), if you choose not to get car insurance in Arizona, the following penalties may apply:\n\n* You could be ticketed and fined between $500 and $1,000.\n* Your vehicle registration and your drivers' license could be suspended.\n* Your vehicle could be impounded.\n* If you cause an accident, you or the owner of the vehicle could be sued.\n* When you finally want coverage, you'll find most insurers charge higher rates for previously uninsured drivers.",
+      "refused": false,
+      "faithfulness": 1.0,
+      "correctness": 0.8,
+      "retrieved": [
+        {
+          "doc_name": "AZ New Driver's Guide to Auto Insurance",
+          "chunk_index": 0,
+          "score": 0.6777
+        },
+        {
+          "doc_name": "AZ New Driver's Guide to Auto Insurance",
+          "chunk_index": 2,
+          "score": 0.638
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 0,
+          "score": 0.6101
+        },
+        {
+          "doc_name": "AZ New Driver's Guide to Auto Insurance",
+          "chunk_index": 1,
+          "score": 0.6013
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 4,
+          "score": 0.5925
+        }
+      ]
+    },
+    {
+      "id": "g25",
+      "category": "out_of_scope",
+      "recall_at_k": null,
+      "precision_at_k": null,
+      "mrr": null,
+      "answer": "I don't know based on the provided documents.",
+      "refused": true,
+      "faithfulness": 1.0,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 5,
+          "score": 0.5012
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 2,
+          "score": 0.4991
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 8,
+          "score": 0.4971
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": 0.4941
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 2,
+          "score": 0.4939
+        }
+      ]
+    },
+    {
+      "id": "g26",
+      "category": "out_of_scope",
+      "recall_at_k": null,
+      "precision_at_k": null,
+      "mrr": null,
+      "answer": "I don't know based on the provided documents. The context only discusses auto insurance and does not mention health insurance plans.",
+      "refused": true,
+      "faithfulness": 1.0,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 3,
+          "score": 0.5128
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 1,
+          "score": 0.4287
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 1,
+          "score": 0.4272
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 4,
+          "score": 0.4054
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 5,
+          "score": 0.3849
+        }
+      ]
+    },
+    {
+      "id": "g27",
+      "category": "out_of_scope",
+      "recall_at_k": null,
+      "precision_at_k": null,
+      "mrr": null,
+      "answer": "I don't know based on the provided documents. The context only provides general information and guidelines for shopping for auto insurance, but does not recommend or endorse specific companies as being the \"best\" one to buy from.",
+      "refused": true,
+      "faithfulness": 1.0,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 1,
+          "score": 0.6082
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 4,
+          "score": 0.5908
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 1,
+          "score": 0.5641
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 8,
+          "score": 0.5623
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 9,
+          "score": 0.5601
+        }
+      ]
+    },
+    {
+      "id": "g28",
+      "category": "out_of_scope",
+      "recall_at_k": null,
+      "precision_at_k": null,
+      "mrr": null,
+      "answer": "I don't know based on the provided documents.",
+      "refused": true,
+      "faithfulness": 1.0,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 8,
+          "score": 0.5431
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 2,
+          "score": 0.4901
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 9,
+          "score": 0.4888
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 5,
+          "score": 0.4837
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 2,
+          "score": 0.4836
+        }
+      ]
+    },
+    {
+      "id": "g29",
+      "category": "adversarial",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "answer": "No. According to the provided documents, our duty to settle or defend ends when our limit of liability for this coverage has been exhausted by payment of judgments or settlements.",
+      "refused": false,
+      "faithfulness": 0.8,
+      "correctness": 0.7,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 3,
+          "score": 0.4993
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 12,
+          "score": 0.4925
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 22,
+          "score": 0.4747
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 13,
+          "score": 0.4667
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 7,
+          "score": 0.4566
+        }
+      ]
+    },
+    {
+      "id": "g30",
+      "category": "adversarial",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 0.5,
+      "answer": "I don't know based on the provided documents.",
+      "refused": true,
+      "faithfulness": 1.0,
+      "correctness": 0.0,
+      "retrieved": [
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 7,
+          "score": 0.6415
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 23,
+          "score": 0.6401
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 14,
+          "score": 0.6292
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 22,
+          "score": 0.6268
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 21,
+          "score": 0.6139
+        }
+      ]
+    }
+  ]
+}
