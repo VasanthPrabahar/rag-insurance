@@ -16,13 +16,22 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-DEVICE = "mps"
 EMBEDDING_DIM = 384
+
+
+def detect_device() -> str:
+    import torch
+
+    if torch.backends.mps.is_available():
+        return "mps"
+    if torch.cuda.is_available():
+        return "cuda"
+    return "cpu"
 
 
 @lru_cache(maxsize=1)
 def get_model() -> SentenceTransformer:
-    return SentenceTransformer(MODEL_NAME, device=DEVICE)
+    return SentenceTransformer(MODEL_NAME, device=detect_device())
 
 
 def embed_texts(texts: list[str], batch_size: int = 64) -> np.ndarray:
