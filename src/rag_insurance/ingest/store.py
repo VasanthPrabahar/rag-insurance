@@ -24,18 +24,26 @@ CREATE TABLE IF NOT EXISTS chunks (
     state text NOT NULL,
     doc_type text NOT NULL,
     chunk_index integer NOT NULL,
+    section_path text NOT NULL DEFAULT '',
     content text NOT NULL,
     embedding vector({EMBEDDING_DIM}) NOT NULL,
+    content_tsv tsvector GENERATED ALWAYS AS (to_tsvector('english', content)) STORED,
     UNIQUE (doc_name, chunk_index)
 );
+CREATE INDEX IF NOT EXISTS chunks_content_tsv_idx ON chunks USING GIN (content_tsv);
+-- HNSW (m=16, ef_construction=64 defaults): approximate NN. At this corpus
+-- size the win is pedagogical — measured against exact scan in NOTES/phase3.md.
+CREATE INDEX IF NOT EXISTS chunks_embedding_hnsw_idx
+    ON chunks USING hnsw (embedding vector_cosine_ops);
 """
 
 UPSERT = """
-INSERT INTO chunks (doc_name, state, doc_type, chunk_index, content, embedding)
-VALUES (%s, %s, %s, %s, %s, %s::vector)
+INSERT INTO chunks (doc_name, state, doc_type, chunk_index, section_path, content, embedding)
+VALUES (%s, %s, %s, %s, %s, %s, %s::vector)
 ON CONFLICT (doc_name, chunk_index) DO UPDATE SET
     state = EXCLUDED.state,
     doc_type = EXCLUDED.doc_type,
+    section_path = EXCLUDED.section_path,
     content = EXCLUDED.content,
     embedding = EXCLUDED.embedding;
 """
@@ -74,6 +82,7 @@ def upsert_chunks(conn: psycopg.Connection, chunks: list[Chunk], embeddings: np.
                     chunk.state,
                     chunk.doc_type,
                     chunk.chunk_index,
+                    chunk.section_path,
                     chunk.content,
                     to_pgvector(embedding),
                 )

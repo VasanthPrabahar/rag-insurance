@@ -9,7 +9,7 @@ from rag_insurance.ingest.embedder import embed_query
 from rag_insurance.ingest.store import to_pgvector
 
 QUERY = """
-SELECT doc_name, state, doc_type, chunk_index, content,
+SELECT doc_name, state, doc_type, chunk_index, section_path, content,
        1 - (embedding <=> %(q)s::vector) AS score
 FROM chunks
 ORDER BY embedding <=> %(q)s::vector
@@ -22,6 +22,7 @@ class RetrievedChunk(BaseModel):
     state: str
     doc_type: str
     chunk_index: int
+    section_path: str = ""
     content: str
     score: float
 
@@ -35,8 +36,9 @@ def retrieve(conn: psycopg.Connection, question: str, k: int = 5) -> list[Retrie
             state=row[1],
             doc_type=row[2],
             chunk_index=row[3],
-            content=row[4],
-            score=row[5],
+            section_path=row[4],
+            content=row[5],
+            score=row[6],
         )
         for row in rows
     ]

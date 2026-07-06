@@ -1,7 +1,8 @@
-"""CLI: `rag ingest` and `rag ask`."""
+"""CLI: `rag ingest`, `rag ask`, `rag eval`."""
 
 from __future__ import annotations
 
+import time
 from pathlib import Path
 
 import typer
@@ -41,14 +42,18 @@ def ingest(data_dir: Path = DATA_DIR) -> None:
 def ask(
     question: str,
     k: int = typer.Option(5, "--k", help="Number of chunks to retrieve"),
+    dense_only: bool = typer.Option(False, "--dense-only", help="Skip sparse+RRF fusion"),
+    rerank: bool = typer.Option(
+        False, "--rerank/--no-rerank", help="Cross-encoder reranking (default off, see NOTES)"
+    ),
 ) -> None:
     """Answer a question from the ingested corpus."""
     from rag_insurance.generation.answer import answer
     from rag_insurance.ingest import store
-    from rag_insurance.retrieval.dense import retrieve
+    from rag_insurance.retrieval.hybrid import search
 
     with store.connect() as conn:
-        chunks = retrieve(conn, question, k=k)
+        chunks = search(conn, question, k=k, dense_only=dense_only, use_rerank=rerank)
 
     typer.echo(answer(question, chunks))
 
@@ -67,20 +72,27 @@ def eval(
     k: int = typer.Option(5, "--k", help="Chunks to retrieve per question"),
     skip_llm: bool = typer.Option(False, "--skip-llm", help="Retrieval metrics only, no judge"),
     tag: str = typer.Option("untagged", "--tag", help="Label for this run in results files"),
+    dense_only: bool = typer.Option(False, "--dense-only", help="Skip sparse+RRF fusion"),
+    rerank: bool = typer.Option(
+        False, "--rerank/--no-rerank", help="Cross-encoder reranking (default off, see NOTES)"
+    ),
 ) -> None:
     """Run the golden-set evaluation."""
     from rag_insurance.eval import runner
     from rag_insurance.eval.judge import judge_answer
     from rag_insurance.generation.answer import answer as generate_answer
     from rag_insurance.ingest import store
-    from rag_insurance.retrieval.dense import retrieve
+    from rag_insurance.retrieval.hybrid import search
 
     items = runner.load_golden_set()
     results = []
     with store.connect() as conn:
         for item in items:
-            chunks = retrieve(conn, item.question, k=k)
+            t0 = time.perf_counter()
+            chunks = search(conn, item.question, k=k, dense_only=dense_only, use_rerank=rerank)
+            elapsed_ms = (time.perf_counter() - t0) * 1000
             result = runner.score_retrieval(item, chunks, k)
+            result.retrieval_ms = round(elapsed_ms, 1)
             result.retrieved = [
                 {"doc_name": c.doc_name, "chunk_index": c.chunk_index, "score": round(c.score, 4)}
                 for c in chunks

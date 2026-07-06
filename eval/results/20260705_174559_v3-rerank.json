@@ -1,0 +1,1236 @@
+{
+  "tag": "v3-rerank",
+  "timestamp": "20260705_174559",
+  "k": 5,
+  "skip_llm": true,
+  "summary": {
+    "overall": {
+      "n": 30,
+      "recall_at_k": 0.7308,
+      "precision_at_k": 0.2154,
+      "mrr": 0.4885,
+      "retrieval_ms": 525.5967,
+      "faithfulness": null,
+      "correctness": null
+    },
+    "per_category": {
+      "adversarial": {
+        "n": 2,
+        "recall_at_k": 0.5,
+        "precision_at_k": 0.1,
+        "mrr": 0.5,
+        "retrieval_ms": 222.65,
+        "faithfulness": null,
+        "correctness": null
+      },
+      "lookup": {
+        "n": 12,
+        "recall_at_k": 0.75,
+        "precision_at_k": 0.25,
+        "mrr": 0.4167,
+        "retrieval_ms": 986.8917,
+        "faithfulness": null,
+        "correctness": null
+      },
+      "multi_hop": {
+        "n": 6,
+        "recall_at_k": 0.5,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "retrieval_ms": 224.7333,
+        "faithfulness": null,
+        "correctness": null
+      },
+      "out_of_scope": {
+        "n": 4,
+        "recall_at_k": null,
+        "precision_at_k": null,
+        "mrr": null,
+        "retrieval_ms": 212.0,
+        "faithfulness": null,
+        "correctness": null
+      },
+      "state_specific": {
+        "n": 6,
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.6167,
+        "retrieval_ms": 213.9167,
+        "faithfulness": null,
+        "correctness": null
+      }
+    }
+  },
+  "items": [
+    {
+      "id": "g01",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.25,
+      "retrieval_ms": 9359.8,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 5,
+          "score": 2.6245
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 1,
+          "score": 2.3651
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 2,
+          "score": 2.1049
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 14,
+          "score": 1.2031
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 3,
+          "score": 1.1213
+        }
+      ]
+    },
+    {
+      "id": "g02",
+      "category": "lookup",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "retrieval_ms": 237.8,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 8,
+          "score": 4.8906
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 2,
+          "score": 1.1821
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 1,
+          "score": 0.3689
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 11,
+          "score": 0.2485
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 6,
+          "score": 0.0969
+        }
+      ]
+    },
+    {
+      "id": "g03",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "retrieval_ms": 228.5,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 10,
+          "score": 3.2657
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 10,
+          "score": 2.8717
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 6,
+          "score": 2.1483
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 11,
+          "score": 1.8206
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 9,
+          "score": 1.8141
+        }
+      ]
+    },
+    {
+      "id": "g04",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.25,
+      "retrieval_ms": 235.3,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "TX Auto Insurance Comparison Worksheet",
+          "chunk_index": 1,
+          "score": -0.8612
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 10,
+          "score": -0.9281
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 3,
+          "score": -2.9669
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 1,
+          "score": -2.9731
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 3,
+          "score": -3.0428
+        }
+      ]
+    },
+    {
+      "id": "g05",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "retrieval_ms": 230.9,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 3,
+          "score": 1.6372
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 1,
+          "score": 0.1113
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 3,
+          "score": -1.8765
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": -2.1764
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 2,
+          "score": -2.725
+        }
+      ]
+    },
+    {
+      "id": "g06",
+      "category": "lookup",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "retrieval_ms": 227.1,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 6,
+          "score": 2.7237
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 1,
+          "score": 1.0456
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 4,
+          "score": 0.5764
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": -0.5167
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 5,
+          "score": -1.3679
+        }
+      ]
+    },
+    {
+      "id": "g07",
+      "category": "lookup",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "retrieval_ms": 225.2,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 1,
+          "score": 1.8758
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 6,
+          "score": 0.4979
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 2,
+          "score": 0.3886
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 3,
+          "score": -0.1917
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": -0.2465
+        }
+      ]
+    },
+    {
+      "id": "g08",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.5,
+      "retrieval_ms": 215.6,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 8,
+          "score": 3.7308
+        },
+        {
+          "doc_name": "AZ Consumer Guide to How Insurers Use Credit Information",
+          "chunk_index": 0,
+          "score": 2.3518
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 5,
+          "score": 1.9145
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 7,
+          "score": 0.9035
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 8,
+          "score": 0.8181
+        }
+      ]
+    },
+    {
+      "id": "g09",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 0.5,
+      "retrieval_ms": 228.7,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 11,
+          "score": 0.2823
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 2,
+          "score": 0.2617
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 2,
+          "score": -0.1792
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 6,
+          "score": -0.5342
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 10,
+          "score": -0.686
+        }
+      ]
+    },
+    {
+      "id": "g10",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.25,
+      "retrieval_ms": 233.8,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 5,
+          "score": 1.1427
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 1,
+          "score": -0.3426
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": -0.9678
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 7,
+          "score": -2.2082
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": -2.2091
+        }
+      ]
+    },
+    {
+      "id": "g11",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.6,
+      "mrr": 1.0,
+      "retrieval_ms": 208.1,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 3,
+          "score": 5.0383
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 6,
+          "score": 3.6094
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 1,
+          "score": 3.5609
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 3,
+          "score": 3.266
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 2,
+          "score": 2.8697
+        }
+      ]
+    },
+    {
+      "id": "g12",
+      "category": "lookup",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 0.25,
+      "retrieval_ms": 211.9,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 12,
+          "score": 3.4433
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 3,
+          "score": 2.8081
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 5,
+          "score": 2.1901
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": 1.327
+        },
+        {
+          "doc_name": "TX Auto Insurance Shopping Guide",
+          "chunk_index": 0,
+          "score": 1.303
+        }
+      ]
+    },
+    {
+      "id": "g13",
+      "category": "multi_hop",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "retrieval_ms": 226.2,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 14,
+          "score": 3.9144
+        },
+        {
+          "doc_name": "AZ New Driver's Guide to Auto Insurance",
+          "chunk_index": 1,
+          "score": 0.0526
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 2,
+          "score": -0.9177
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 16,
+          "score": -1.1713
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 1,
+          "score": -1.609
+        }
+      ]
+    },
+    {
+      "id": "g14",
+      "category": "multi_hop",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "retrieval_ms": 233.7,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 5,
+          "score": 2.1806
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 11,
+          "score": 0.1568
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 6,
+          "score": -0.4504
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 3,
+          "score": -0.9832
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 2,
+          "score": -1.2632
+        }
+      ]
+    },
+    {
+      "id": "g15",
+      "category": "multi_hop",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "retrieval_ms": 232.0,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 12,
+          "score": 4.1379
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 6,
+          "score": 2.0851
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 8,
+          "score": 1.782
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 11,
+          "score": 0.9732
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 4,
+          "score": 0.9025
+        }
+      ]
+    },
+    {
+      "id": "g16",
+      "category": "multi_hop",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "retrieval_ms": 212.6,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 16,
+          "score": 0.5668
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 17,
+          "score": -1.935
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 18,
+          "score": -2.9958
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 7,
+          "score": -3.6954
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 15,
+          "score": -4.2275
+        }
+      ]
+    },
+    {
+      "id": "g17",
+      "category": "multi_hop",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "retrieval_ms": 212.3,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 6,
+          "score": 1.5835
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 6,
+          "score": 1.2768
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 3,
+          "score": 1.1975
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 10,
+          "score": 0.5067
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 2,
+          "score": 0.2387
+        }
+      ]
+    },
+    {
+      "id": "g18",
+      "category": "multi_hop",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "retrieval_ms": 231.6,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 23,
+          "score": 5.5961
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 2,
+          "score": -0.3421
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 11,
+          "score": -0.6357
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 6,
+          "score": -1.0725
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 12,
+          "score": -1.1642
+        }
+      ]
+    },
+    {
+      "id": "g19",
+      "category": "state_specific",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.2,
+      "retrieval_ms": 208.5,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "TX Adopted Rule: Named-Driver Auto Policy Disclosure (28 TAC 5.208)",
+          "chunk_index": 27,
+          "score": 3.3711
+        },
+        {
+          "doc_name": "TX Adopted Rule: Named-Driver Auto Policy Disclosure (28 TAC 5.208)",
+          "chunk_index": 28,
+          "score": 2.5522
+        },
+        {
+          "doc_name": "TX Adopted Rule: Named-Driver Auto Policy Disclosure (28 TAC 5.208)",
+          "chunk_index": 25,
+          "score": 2.4251
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 2,
+          "score": 1.6999
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 0,
+          "score": 1.4098
+        }
+      ]
+    },
+    {
+      "id": "g20",
+      "category": "state_specific",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.5,
+      "retrieval_ms": 213.1,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "CA Low Cost Automobile Insurance Program Pamphlet",
+          "chunk_index": 0,
+          "score": 2.36
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 1,
+          "score": 0.9963
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 9,
+          "score": 0.354
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 12,
+          "score": -0.4993
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 6,
+          "score": -1.0622
+        }
+      ]
+    },
+    {
+      "id": "g21",
+      "category": "state_specific",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "retrieval_ms": 212.7,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 4,
+          "score": 2.862
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 11,
+          "score": 2.6404
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 11,
+          "score": 1.8089
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 11,
+          "score": 1.7462
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 12,
+          "score": 1.5049
+        }
+      ]
+    },
+    {
+      "id": "g22",
+      "category": "state_specific",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.5,
+      "retrieval_ms": 227.2,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 9,
+          "score": 4.089
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 3,
+          "score": 3.8959
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 2,
+          "score": 2.8501
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 1,
+          "score": 2.3565
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 0,
+          "score": 1.959
+        }
+      ]
+    },
+    {
+      "id": "g23",
+      "category": "state_specific",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.5,
+      "retrieval_ms": 210.4,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "AZ Consumer Guide to How Insurers Use Credit Information",
+          "chunk_index": 0,
+          "score": 3.8536
+        },
+        {
+          "doc_name": "AZ Consumer Guide to How Insurers Use Credit Information",
+          "chunk_index": 1,
+          "score": 3.778
+        },
+        {
+          "doc_name": "AZ Consumer Guide to How Insurers Use Credit Information",
+          "chunk_index": 2,
+          "score": 1.2651
+        },
+        {
+          "doc_name": "AZ Consumer Guide to How Insurers Use Credit Information",
+          "chunk_index": 3,
+          "score": 0.5179
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 7,
+          "score": -0.7999
+        }
+      ]
+    },
+    {
+      "id": "g24",
+      "category": "state_specific",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "retrieval_ms": 211.6,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "AZ New Driver's Guide to Auto Insurance",
+          "chunk_index": 0,
+          "score": 1.9485
+        },
+        {
+          "doc_name": "AZ New Driver's Guide to Auto Insurance",
+          "chunk_index": 2,
+          "score": -0.3503
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 0,
+          "score": -0.825
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 3,
+          "score": -1.1835
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 1,
+          "score": -2.9605
+        }
+      ]
+    },
+    {
+      "id": "g25",
+      "category": "out_of_scope",
+      "recall_at_k": null,
+      "precision_at_k": null,
+      "mrr": null,
+      "retrieval_ms": 224.9,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 2,
+          "score": -2.9329
+        },
+        {
+          "doc_name": "AZ New Driver's Guide to Auto Insurance",
+          "chunk_index": 1,
+          "score": -3.5839
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": -4.1955
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 2,
+          "score": -4.3756
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 3,
+          "score": -4.3852
+        }
+      ]
+    },
+    {
+      "id": "g26",
+      "category": "out_of_scope",
+      "recall_at_k": null,
+      "precision_at_k": null,
+      "mrr": null,
+      "retrieval_ms": 207.4,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 2,
+          "score": -8.0937
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 1,
+          "score": -8.3442
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 5,
+          "score": -8.6517
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 1,
+          "score": -8.7853
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 2,
+          "score": -8.7956
+        }
+      ]
+    },
+    {
+      "id": "g27",
+      "category": "out_of_scope",
+      "recall_at_k": null,
+      "precision_at_k": null,
+      "mrr": null,
+      "retrieval_ms": 206.7,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 0,
+          "score": 2.7731
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 1,
+          "score": 2.137
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 9,
+          "score": 1.8145
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 1,
+          "score": 1.5962
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 0,
+          "score": 0.2282
+        }
+      ]
+    },
+    {
+      "id": "g28",
+      "category": "out_of_scope",
+      "recall_at_k": null,
+      "precision_at_k": null,
+      "mrr": null,
+      "retrieval_ms": 209.0,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 11,
+          "score": -2.384
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 2,
+          "score": -2.6412
+        },
+        {
+          "doc_name": "AZ New Driver's Guide to Auto Insurance",
+          "chunk_index": 1,
+          "score": -3.3639
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 1,
+          "score": -4.057
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 9,
+          "score": -4.1538
+        }
+      ]
+    },
+    {
+      "id": "g29",
+      "category": "adversarial",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "retrieval_ms": 232.9,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 3,
+          "score": 0.7885
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 6,
+          "score": -5.1478
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 4,
+          "score": -5.7477
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 11,
+          "score": -6.1118
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 2,
+          "score": -6.4564
+        }
+      ]
+    },
+    {
+      "id": "g30",
+      "category": "adversarial",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "retrieval_ms": 212.4,
+      "answer": null,
+      "refused": null,
+      "faithfulness": null,
+      "correctness": null,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 14,
+          "score": 5.3519
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 6,
+          "score": 2.8525
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 10,
+          "score": 2.6139
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 13,
+          "score": 1.6333
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 7,
+          "score": 1.479
+        }
+      ]
+    }
+  ]
+}

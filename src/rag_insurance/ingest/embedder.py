@@ -15,8 +15,11 @@ from functools import lru_cache
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-EMBEDDING_DIM = 384
+MODEL_NAME = "BAAI/bge-base-en-v1.5"
+EMBEDDING_DIM = 768
+# bge-v1.5 retrieval works best with this instruction prefixed to queries
+# (passages are embedded without it).
+QUERY_INSTRUCTION = "Represent this sentence for searching relevant passages: "
 
 
 def detect_device() -> str:
@@ -44,4 +47,4 @@ def embed_texts(texts: list[str], batch_size: int = 64) -> np.ndarray:
 
 
 def embed_query(query: str) -> list[float]:
-    return embed_texts([query])[0].tolist()
+    return embed_texts([QUERY_INSTRUCTION + query])[0].tolist()

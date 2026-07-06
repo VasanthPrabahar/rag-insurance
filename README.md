@@ -46,7 +46,7 @@ flowchart TD
 | v0 | Foundation — repo scaffold, tooling, corpus downloader | ✅ done |
 | v1 | Naive RAG end to end — fixed-size chunks, dense-only retrieval, grounded generation (the intentionally naive baseline every later phase must beat) | ✅ done |
 | v2 | Evaluation harness + corpus rebalance — golden dataset, retrieval + judge metrics, CI; changes become eval-gated from here | ✅ done |
-| v3 | Retrieval upgrades — structure-aware chunking, hybrid BM25/dense with RRF, cross-encoder reranking, HNSW | ⬜ planned |
+| v3 | Retrieval upgrades — hybrid BM25/dense with RRF, bge embeddings, HNSW; structure-chunking and reranking measured and reverted (see NOTES/phase3.md) | ✅ done |
 | v4 | Query rewriting + metadata filtering + citation-grounded answers with refusal | ⬜ planned |
 | v5 | Delivery — FastAPI service, Airflow ingestion DAG, full Docker delivery | ⬜ planned |
 | v6 | Agentic layer — LangChain/LangGraph router + query decomposition, with honest latency comparison | ⬜ planned |

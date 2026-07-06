@@ -4,7 +4,7 @@ _Update this file at the end of every phase._
 
 ## Current phase
 
-**v2 — Eval harness + corpus rebalance** (complete)
+**v3 — Retrieval quality** (complete)
 
 ## Phase plan
 
@@ -62,14 +62,28 @@ delta before landing.
   and g02 (friend/permissive use) — policy legalese loses to
   conversational phrasing in dense retrieval
 
-## Next steps (v3 — Retrieval upgrades, all eval-gated)
+### v3 — Retrieval quality (each step measured; see NOTES/phase3.md)
+- KEPT: bge-base-en-v1.5 embeddings @ 512/64 chunks (recall@5 0.577 → 0.769,
+  MRR 0.463 → 0.571) — beat the 256/32 MiniLM-aligned variant in an A/B
+- KEPT: hybrid BM25 (tsvector/GIN) + dense fused with RRF k=60
+  (MRR 0.571 → 0.615; g01 rental-expenses probe fixed by exact-term match)
+- KEPT: HNSW index (identical results, 0.72 → 0.47 ms; pedagogical at 174
+  chunks — honest tradeoff notes in NOTES/phase3.md)
+- REVERTED: structure-aware chunking (recall 0.769 → 0.615; splitter kept
+  behind STRUCTURE_CHUNKING=False)
+- REVERTED to default-off: cross-encoder reranking (fixed g19/g04, broke
+  g14/g15/g30, net negative, +430ms; toggle with --rerank)
+- CLI toggles for Phase 6 ablations: --dense-only, --rerank/--no-rerank
+- Retrieval latency now recorded per query in results JSONs
 
-- Structure-aware chunking (respect policy Parts/sections; stop splitting
-  definitions from exclusions)
-- Hybrid retrieval: BM25 + dense with reciprocal rank fusion
-- Cross-encoder reranking of the fused candidate list
-- HNSW index with measured recall/latency tradeoff vs exact scan
-- Each lands separately with its eval delta in `eval/RESULTS.md`
+## Next steps (v4 — Query & answer quality)
+
+- Query rewriting (conversational → policy register; the g02
+  friend/permissive-use miss is the target case)
+- Metadata filtering (state-aware retrieval for state_specific questions)
+- Citation-grounded answers with explicit refusal behavior
+- Consider a longer-context reranker (bge-reranker) to revisit the Step 4
+  truncation hypothesis
 
 ## Key decisions
 
@@ -79,6 +93,11 @@ delta before landing.
   Docker for reproducibility (pgvector already runs via docker-compose).
 - **Ollama `llama3.1:8b`** for generation and judging — local-first; the
   weak-judge tradeoff is documented in `NOTES/phase2.md`.
+- **bge-base-en-v1.5 embeddings** (768-dim, 512-token capacity) — won the
+  Phase 3 A/B against chunk-shrinking for MiniLM; query-instruction prefix
+  applied at query time.
+- **Reverts are recorded, not erased** — structure chunking and reranking
+  live in the codebase behind toggles with their eval rows preserved.
 - **Eval-gated changes** — active as of v2: no retrieval/chunking/prompting
   change lands without a measured effect on the golden eval set.
 - **Retrieval metrics are the primary gate** — deterministic; judge scores
