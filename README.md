@@ -18,21 +18,26 @@ right"; it ships because it beats the last measured baseline.
 ```mermaid
 flowchart TD
     subgraph Ingestion Pipeline
-        A[Raw documents\nPDF / HTML] --> B[Parse & structure\npreserve hierarchy, defined terms]
-        B --> C[Chunk\nsection/clause aware]
-        C --> D[Embed]
-        D --> E[(pgvector store)]
-        C --> F[(Full-text / BM25 index)]
+        A[Raw documents\nPDF / HTML] --> B[Parse\npymupdf / bs4, strip headers]
+        B --> C[Chunk\nfixed 512-token windows, 64 overlap\nstructure-aware measured & reverted]
+        C --> D[Embed\nbge-base-en-v1.5]
+        D --> E[(pgvector + HNSW)]
+        C --> F[(tsvector + GIN\nfull-text index)]
     end
 
     subgraph Query Pipeline
-        Q[User query] --> H1[Dense retrieval\npgvector]
-        Q --> H2[Sparse retrieval\nBM25]
-        H1 --> R[RRF fusion]
+        Q[User query] --> W[Query rewrite\npolicy-term expansion, Ollama]
+        Q --> SF[State filter\nregex, no LLM]
+        W --> H1[Dense retrieval\noriginal + expanded]
+        W --> H2[Sparse retrieval\nts_rank_cd, original + expanded]
+        SF -.filters.-> H1
+        SF -.filters.-> H2
+        H1 --> R[RRF fusion k=60]
         H2 --> R
-        R --> RR[Rerank]
-        RR --> G[Grounded generation\nOllama llama3.1:8b]
-        G --> OUT[Answer + citations]
+        R --> RR[Rerank\nmeasured, default off]
+        RR --> G[Grounded generation\nllama3.1:8b, JSON + citations]
+        G --> V[Mechanical citation\nverification]
+        V --> OUT[Answer + verified citations\nor refusal]
     end
 
     E -.-> H1
@@ -47,7 +52,7 @@ flowchart TD
 | v1 | Naive RAG end to end — fixed-size chunks, dense-only retrieval, grounded generation (the intentionally naive baseline every later phase must beat) | ✅ done |
 | v2 | Evaluation harness + corpus rebalance — golden dataset, retrieval + judge metrics, CI; changes become eval-gated from here | ✅ done |
 | v3 | Retrieval upgrades — hybrid BM25/dense with RRF, bge embeddings, HNSW; structure-chunking and reranking measured and reverted (see NOTES/phase3.md) | ✅ done |
-| v4 | Query rewriting + metadata filtering + citation-grounded answers with refusal | ⬜ planned |
+| v4 | Query rewriting (term expansion) + state filtering + mechanically verified citations with refusal | ✅ done |
 | v5 | Delivery — FastAPI service, Airflow ingestion DAG, full Docker delivery | ⬜ planned |
 | v6 | Agentic layer — LangChain/LangGraph router + query decomposition, with honest latency comparison | ⬜ planned |
 | v7 | Polish — demo UI, final README | ⬜ planned |

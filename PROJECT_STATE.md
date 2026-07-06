@@ -4,7 +4,7 @@ _Update this file at the end of every phase._
 
 ## Current phase
 
-**v3 — Retrieval quality** (complete)
+**v4 — Query intelligence + grounded generation** (complete)
 
 ## Phase plan
 
@@ -76,14 +76,38 @@ delta before landing.
 - CLI toggles for Phase 6 ablations: --dense-only, --rerank/--no-rerank
 - Retrieval latency now recorded per query in results JSONs
 
-## Next steps (v4 — Query & answer quality)
+### v4 — Query intelligence + grounded generation (see NOTES/phase4.md)
+- KEPT: query rewriting as additive term expansion (llama3.1:8b couldn't do
+  full rewrites reliably — echoed few-shot examples). MRR 0.615 → 0.663, no
+  regressions, +1.45s/query. g02 target NOT flipped: its evidence moved
+  dense rank 28 → 14 but it's a chunk-representation problem (documented)
+- KEPT: regex state filtering (named state + NAIC + ISO specimens; the
+  specimens are state-agnostic by judgment call). Metrics flat, zero cost,
+  guards cross-state contamination
+- Grounded generation: structured JSON {answer, citations, refused},
+  pydantic-validated with retry, MECHANICAL citation verification (drop
+  hallucinated ids, force refusal on zero valid citations), CLI renders
+  [doc_name > chunk] citations; verification counts recorded per eval run
+- Spot-checks: deductible probe now grounds to a real cited chunk;
+  TX-minimums extracts 30/60/25 perfectly when evidence is in context —
+  no 8B generation ceiling; g19 failure is retrieval ranking only
+- Ablation recorded: rewrite+rerank (0.731/0.506) — rerank pathology
+  persists, stays default-off
+- Citation prompt v1 caused extractive quoting (multi_hop faith 0.642);
+  one measured prompt iteration fixed it (0.800 in gated recheck)
+- v4-final: recall@5 0.769, MRR 0.578, faithfulness 0.860, correctness
+  0.727 (correctness +0.054 vs v3; multi_hop 0.483 → 0.833; 29/29 citations
+  mechanically verified, 0 fabricated). Faithfulness 0.043 under target,
+  within the documented judge/rewrite noise floor — see NOTES/phase4.md
 
-- Query rewriting (conversational → policy register; the g02
-  friend/permissive-use miss is the target case)
-- Metadata filtering (state-aware retrieval for state_specific questions)
-- Citation-grounded answers with explicit refusal behavior
-- Consider a longer-context reranker (bge-reranker) to revisit the Step 4
-  truncation hypothesis
+## Next steps (v5 — Delivery)
+
+- FastAPI service wrapping ask/ingest
+- Airflow ingestion DAG
+- Full Docker delivery (compose: db + api + ollama)
+- Open retrieval items carried forward: g02 (targeted structure-chunking of
+  insuring agreements), keyword-density noise (doc-type priors or
+  bge-reranker), longer-context reranker revisit
 
 ## Key decisions
 

@@ -46,16 +46,31 @@ def ask(
     rerank: bool = typer.Option(
         False, "--rerank/--no-rerank", help="Cross-encoder reranking (default off, see NOTES)"
     ),
+    rewrite: bool = typer.Option(
+        True, "--rewrite/--no-rewrite", help="Policy-register query rewriting via Ollama"
+    ),
 ) -> None:
     """Answer a question from the ingested corpus."""
-    from rag_insurance.generation.answer import answer
+    from rag_insurance.generation.answer import grounded_answer
     from rag_insurance.ingest import store
     from rag_insurance.retrieval.hybrid import search
 
     with store.connect() as conn:
-        chunks = search(conn, question, k=k, dense_only=dense_only, use_rerank=rerank)
+        chunks = search(
+            conn, question, k=k, dense_only=dense_only, use_rerank=rerank, use_rewrite=rewrite
+        )
 
-    typer.echo(answer(question, chunks))
+    verified = grounded_answer(question, chunks)
+    typer.echo(verified.answer)
+    if verified.citations:
+        typer.echo("\nCitations:")
+        for cid in verified.citations:
+            chunk = chunks[cid - 1]
+            typer.echo(f"  [{cid}] {chunk.doc_name} > chunk {chunk.chunk_index}")
+    if verified.dropped_citations:
+        typer.echo(f"\n(dropped hallucinated citation ids: {verified.dropped_citations})")
+    if verified.forced_refusal:
+        typer.echo("(answer had no valid citations; refusal enforced)")
 
     typer.echo("\n--- Retrieved chunks ---")
     for chunk in chunks:
@@ -76,11 +91,14 @@ def eval(
     rerank: bool = typer.Option(
         False, "--rerank/--no-rerank", help="Cross-encoder reranking (default off, see NOTES)"
     ),
+    rewrite: bool = typer.Option(
+        True, "--rewrite/--no-rewrite", help="Policy-register query rewriting via Ollama"
+    ),
 ) -> None:
     """Run the golden-set evaluation."""
     from rag_insurance.eval import runner
     from rag_insurance.eval.judge import judge_answer
-    from rag_insurance.generation.answer import answer as generate_answer
+    from rag_insurance.generation.answer import grounded_answer
     from rag_insurance.ingest import store
     from rag_insurance.retrieval.hybrid import search
 
@@ -89,7 +107,14 @@ def eval(
     with store.connect() as conn:
         for item in items:
             t0 = time.perf_counter()
-            chunks = search(conn, item.question, k=k, dense_only=dense_only, use_rerank=rerank)
+            chunks = search(
+                conn,
+                item.question,
+                k=k,
+                dense_only=dense_only,
+                use_rerank=rerank,
+                use_rewrite=rewrite,
+            )
             elapsed_ms = (time.perf_counter() - t0) * 1000
             result = runner.score_retrieval(item, chunks, k)
             result.retrieval_ms = round(elapsed_ms, 1)
@@ -98,8 +123,12 @@ def eval(
                 for c in chunks
             ]
             if not skip_llm:
-                result.answer = generate_answer(item.question, chunks)
-                result.refused = runner.is_refusal(result.answer)
+                verified = grounded_answer(item.question, chunks)
+                result.answer = verified.answer
+                result.refused = verified.refused
+                result.citations_valid = len(verified.citations)
+                result.citations_dropped = len(verified.dropped_citations)
+                result.forced_refusal = verified.forced_refusal
                 if item.category == "out_of_scope" and result.refused:
                     # Refusing an unanswerable question is the correct,
                     # trivially faithful behavior; no judge needed.

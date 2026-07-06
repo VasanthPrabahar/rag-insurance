@@ -46,6 +46,9 @@ class ItemResult(BaseModel):
     retrieval_ms: float | None = None
     answer: str | None = None
     refused: bool | None = None
+    citations_valid: int | None = None
+    citations_dropped: int | None = None
+    forced_refusal: bool | None = None
     faithfulness: float | None = None
     correctness: float | None = None
     retrieved: list[dict] = []
@@ -94,7 +97,16 @@ def aggregate(results: list[ItemResult]) -> dict:
 
     categories = sorted({r.category for r in results})
     per_category = {cat: block([r for r in results if r.category == cat]) for cat in categories}
-    return {"overall": block(results), "per_category": per_category}
+    summary = {"overall": block(results), "per_category": per_category}
+
+    judged = [r for r in results if r.citations_valid is not None]
+    if judged:
+        summary["citation_verification"] = {
+            "valid": sum(r.citations_valid or 0 for r in judged),
+            "dropped": sum(r.citations_dropped or 0 for r in judged),
+            "forced_refusals": sum(1 for r in judged if r.forced_refusal),
+        }
+    return summary
 
 
 def write_results(

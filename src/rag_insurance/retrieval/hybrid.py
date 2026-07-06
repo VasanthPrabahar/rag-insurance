@@ -46,13 +46,31 @@ def search(
     k: int = 5,
     dense_only: bool = False,
     use_rerank: bool = False,
+    use_rewrite: bool = True,
+    use_state_filter: bool = True,
 ) -> list[RetrievedChunk]:
-    if dense_only:
-        return dense.retrieve(conn, question, k=k)
+    states = None
+    if use_state_filter:
+        from rag_insurance.retrieval.state_filter import allowed_states
 
-    dense_hits = dense.retrieve(conn, question, k=CANDIDATES)
-    sparse_hits = sparse.retrieve(conn, question, k=CANDIDATES)
-    fused = rrf_fuse([dense_hits, sparse_hits])
+        states = allowed_states(question)
+
+    if dense_only:
+        return dense.retrieve(conn, question, k=k, states=states)
+
+    queries = [question]
+    if use_rewrite:
+        from rag_insurance.retrieval.rewrite import rewrite_query
+
+        rewritten = rewrite_query(question)
+        if rewritten:
+            queries.append(rewritten)
+
+    lists = []
+    for query in queries:
+        lists.append(dense.retrieve(conn, query, k=CANDIDATES, states=states))
+        lists.append(sparse.retrieve(conn, query, k=CANDIDATES, states=states))
+    fused = rrf_fuse(lists)
     if not use_rerank:
         return fused[:k]
 

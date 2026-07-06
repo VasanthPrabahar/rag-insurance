@@ -17,13 +17,19 @@ SELECT doc_name, state, doc_type, chunk_index, section_path, content,
        ts_rank_cd(content_tsv, websearch_to_tsquery('english', %(q)s)) AS score
 FROM chunks
 WHERE content_tsv @@ websearch_to_tsquery('english', %(q)s)
+  AND (%(states)s::text[] IS NULL OR state = ANY(%(states)s))
 ORDER BY score DESC
 LIMIT %(k)s;
 """
 
 
-def retrieve(conn: psycopg.Connection, question: str, k: int = 20) -> list[RetrievedChunk]:
-    rows = conn.execute(QUERY, {"q": question, "k": k}).fetchall()
+def retrieve(
+    conn: psycopg.Connection,
+    question: str,
+    k: int = 20,
+    states: list[str] | None = None,
+) -> list[RetrievedChunk]:
+    rows = conn.execute(QUERY, {"q": question, "k": k, "states": states}).fetchall()
     return [
         RetrievedChunk(
             doc_name=row[0],

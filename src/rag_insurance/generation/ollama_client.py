@@ -20,10 +20,13 @@ def generate(
     model: str = DEFAULT_MODEL,
     timeout: float = 300.0,
     json_mode: bool = False,
+    temperature: float | None = None,
 ) -> str:
     payload: dict = {"model": model, "prompt": prompt, "stream": False}
     if json_mode:
         payload["format"] = "json"
+    if temperature is not None:
+        payload["options"] = {"temperature": temperature}
     response = httpx.post(f"{get_ollama_host()}/api/generate", json=payload, timeout=timeout)
     response.raise_for_status()
     return response.json()["response"]

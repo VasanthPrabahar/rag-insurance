@@ -12,6 +12,7 @@ QUERY = """
 SELECT doc_name, state, doc_type, chunk_index, section_path, content,
        1 - (embedding <=> %(q)s::vector) AS score
 FROM chunks
+WHERE %(states)s::text[] IS NULL OR state = ANY(%(states)s)
 ORDER BY embedding <=> %(q)s::vector
 LIMIT %(k)s;
 """
@@ -27,9 +28,14 @@ class RetrievedChunk(BaseModel):
     score: float
 
 
-def retrieve(conn: psycopg.Connection, question: str, k: int = 5) -> list[RetrievedChunk]:
+def retrieve(
+    conn: psycopg.Connection,
+    question: str,
+    k: int = 5,
+    states: list[str] | None = None,
+) -> list[RetrievedChunk]:
     query_vec = to_pgvector(embed_query(question))
-    rows = conn.execute(QUERY, {"q": query_vec, "k": k}).fetchall()
+    rows = conn.execute(QUERY, {"q": query_vec, "k": k, "states": states}).fetchall()
     return [
         RetrievedChunk(
             doc_name=row[0],
