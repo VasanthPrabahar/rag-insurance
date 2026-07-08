@@ -24,6 +24,11 @@ pytestmark = pytest.mark.skipif(not db_reachable(), reason="database unreachable
 def client():
     from rag_insurance.api.app import app
 
+    # Tests must not depend on a prior ingest (CI runs pytest first):
+    # ensure the schema exists; empty tables are fine for these tests.
+    with store.connect() as conn:
+        store.init_schema(conn)
+
     with TestClient(app) as test_client:  # context manager runs lifespan
         yield test_client
 
