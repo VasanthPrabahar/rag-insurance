@@ -4,7 +4,7 @@ _Update this file at the end of every phase._
 
 ## Current phase
 
-**v4 — Query intelligence + grounded generation** (complete)
+**v5 — Production service + ingestion pipeline** (complete)
 
 ## Phase plan
 
@@ -100,12 +100,30 @@ delta before landing.
   mechanically verified, 0 fabricated). Faithfulness 0.043 under target,
   within the documented judge/rewrite noise floor — see NOTES/phase4.md
 
-## Next steps (v5 — Delivery)
+### v5 — Production service + ingestion pipeline (see NOTES/phase5.md)
+- FastAPI service (`rag_insurance.api`): models load once at startup
+  (measured: 6.63s load vs 0.21s warm embed), psycopg pool via lifespan;
+  POST /ask streams SSE tokens (incremental answer-field extraction from
+  the JSON generation stream — same evaluated path) + final event with
+  verified citations and expand/retrieve/generate latency breakdown;
+  /ingest, /health (DB+Ollama), /stats; structlog JSON per request
+- Idempotent delta ingestion (`ingest/delta.py`): sha256 manifest table,
+  delete-then-upsert per changed doc in one transaction; proven 15→0
+  reprocessed across consecutive runs
+- Airflow DAG (`dags/ingest_dag.py`), thin wrapper over the delta module;
+  Airflow kept out of core deps/compose by documented judgment call
+- Docker delivery: multi-stage uv Dockerfile, compose db+api, HF weights in
+  a named volume, Ollama native-host via host.docker.internal
+- Tests: 19 passing (API SSE with mocked Ollama, schema validation,
+  citation-verification unit, chunker/metrics/roundtrip); CI needs no Ollama
+- No retrieval changes; v5-final eval row confirms no regression
 
-- FastAPI service wrapping ask/ingest
-- Airflow ingestion DAG
-- Full Docker delivery (compose: db + api + ollama)
-- Open retrieval items carried forward: g02 (targeted structure-chunking of
+## Next steps (v6 — Agentic layer)
+
+- LangChain/LangGraph router + query decomposition
+- Honest latency comparison agentic vs direct pipeline (structlog data is
+  in place)
+- Open retrieval items still carried: g02 (targeted structure-chunking of
   insuring agreements), keyword-density noise (doc-type priors or
   bge-reranker), longer-context reranker revisit
 

@@ -48,6 +48,7 @@ def count_test_chunks(conn) -> int:
 def test_upsert_and_nearest_neighbor(conn):
     chunks, embeddings = make_chunks(3)
     store.upsert_chunks(conn, chunks, embeddings)
+    conn.commit()
 
     # Nearest neighbor to embedding 1 (restricted to test rows) is chunk 1.
     row = conn.execute(

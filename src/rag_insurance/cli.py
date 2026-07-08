@@ -32,6 +32,7 @@ def ingest(data_dir: Path = DATA_DIR) -> None:
                 continue
             embeddings = embed_texts([chunk.content for chunk in chunks])
             store.upsert_chunks(conn, chunks, embeddings)
+            conn.commit()
             typer.echo(f"  {doc.filename}: {len(chunks)} chunks")
         n_docs, n_chunks = store.stats(conn)
 

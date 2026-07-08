@@ -24,3 +24,4 @@ One row per eval run. Retrieval metrics exclude out_of_scope items.
 | v4-final | 2026-07-06 | 0.769 | 0.578 | 0.860 | 0.727 |
 | v4-verify-1 | 2026-07-07 | 0.769 | 0.578 | — | — |
 | v4-verify-2 | 2026-07-07 | 0.769 | 0.578 | — | — |
+| v5-final | 2026-07-08 | 0.769 | 0.578 | — | — |

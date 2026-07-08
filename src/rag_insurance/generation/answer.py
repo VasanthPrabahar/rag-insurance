@@ -14,6 +14,8 @@ this check is mechanical, not model-judged.
 from __future__ import annotations
 
 import json
+import re
+from collections.abc import Iterator
 
 from pydantic import BaseModel, ValidationError
 
@@ -132,3 +134,80 @@ def verify(generated: GroundedAnswer, n_chunks: int) -> VerifiedAnswer:
 def grounded_answer(question: str, chunks: list[RetrievedChunk]) -> VerifiedAnswer:
     generated = _generate(build_prompt(question, chunks))
     return verify(generated, n_chunks=len(chunks))
+
+
+class AnswerFieldExtractor:
+    """Incrementally extract the "answer" string from a streaming JSON object.
+
+    The generator emits JSON ({"answer": "...", ...}); streaming raw JSON to a
+    client is useless for display, so this state machine watches the byte
+    stream for the answer field and yields its unescaped content as it
+    arrives — real token streaming with the same evaluated generation path.
+    """
+
+    _OPEN = re.compile(r'"answer"\s*:\s*"')
+
+    def __init__(self) -> None:
+        self._buffer = ""
+        self._in_answer = False
+        self._escape = False
+        self._done = False
+
+    def feed(self, delta: str) -> str:
+        if self._done:
+            return ""
+        out: list[str] = []
+        self._buffer += delta
+        if not self._in_answer:
+            match = self._OPEN.search(self._buffer)
+            if not match:
+                return ""
+            self._in_answer = True
+            self._buffer = self._buffer[match.end() :]
+        text = self._buffer
+        self._buffer = ""
+        for ch in text:
+            if self._escape:
+                out.append({"n": "\n", "t": "\t", '"': '"', "\\": "\\"}.get(ch, ch))
+                self._escape = False
+            elif ch == "\\":
+                self._escape = True
+            elif ch == '"':
+                self._done = True
+                break
+            else:
+                out.append(ch)
+        return "".join(out)
+
+
+def stream_grounded_answer(
+    question: str, chunks: list[RetrievedChunk]
+) -> Iterator[tuple[str, str | VerifiedAnswer]]:
+    """Yield ("token", text) deltas, then one ("final", VerifiedAnswer).
+
+    No retry here (unlike grounded_answer): a stream can't be transparently
+    restarted after tokens were already sent. A parse failure at the end
+    yields a refusal-shaped final event instead.
+    """
+    prompt = build_prompt(question, chunks)
+    extractor = AnswerFieldExtractor()
+    raw_parts: list[str] = []
+    for delta in ollama_client.generate_stream(prompt, json_mode=True, temperature=0.0):
+        raw_parts.append(delta)
+        text = extractor.feed(delta)
+        if text:
+            yield ("token", text)
+    try:
+        generated = _parse("".join(raw_parts))
+        yield ("final", verify(generated, n_chunks=len(chunks)))
+    except (ValueError, KeyError, TypeError, json.JSONDecodeError, ValidationError):
+        yield (
+            "final",
+            VerifiedAnswer(
+                answer=REFUSAL,
+                citations=[],
+                refused=True,
+                dropped_citations=[],
+                forced_refusal=True,
+            ),
+        )

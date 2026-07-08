@@ -9,6 +9,31 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      POSTGRES_URL: postgresql://postgres:postgres@db:5432/rag_insurance
+      # Ollama runs on the host (Apple Silicon GPU access); from inside the
+      # container the host is host.docker.internal (extra_hosts covers Linux).
+      OLLAMA_HOST: http://host.docker.internal:11434
+      HF_HOME: /data/hf
+    volumes:
+      - hf-cache:/data/hf   # model weights survive container rebuilds
+      - ./data:/app/data    # corpus for /ingest
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   pgdata:
+  hf-cache:

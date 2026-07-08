@@ -66,6 +66,19 @@ def search(
         if rewritten:
             queries.append(rewritten)
 
+    return retrieve_fused(conn, question, queries, k=k, states=states, use_rerank=use_rerank)
+
+
+def retrieve_fused(
+    conn: psycopg.Connection,
+    question: str,
+    queries: list[str],
+    k: int = 5,
+    states: list[str] | None = None,
+    use_rerank: bool = False,
+) -> list[RetrievedChunk]:
+    """Fused retrieval over pre-built query variants (used by the API so the
+    expand stage can be timed separately from retrieval)."""
     lists = []
     for query in queries:
         lists.append(dense.retrieve(conn, query, k=CANDIDATES, states=states))

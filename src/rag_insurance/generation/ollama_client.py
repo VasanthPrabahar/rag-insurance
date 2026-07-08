@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import json
 import os
+from collections.abc import Iterator
 
 import httpx
 from dotenv import load_dotenv
@@ -30,3 +32,37 @@ def generate(
     response = httpx.post(f"{get_ollama_host()}/api/generate", json=payload, timeout=timeout)
     response.raise_for_status()
     return response.json()["response"]
+
+
+def generate_stream(
+    prompt: str,
+    model: str = DEFAULT_MODEL,
+    timeout: float = 300.0,
+    json_mode: bool = False,
+    temperature: float | None = None,
+) -> Iterator[str]:
+    """Yield response text deltas as Ollama produces them."""
+    payload: dict = {"model": model, "prompt": prompt, "stream": True}
+    if json_mode:
+        payload["format"] = "json"
+    if temperature is not None:
+        payload["options"] = {"temperature": temperature}
+    with httpx.stream(
+        "POST", f"{get_ollama_host()}/api/generate", json=payload, timeout=timeout
+    ) as response:
+        response.raise_for_status()
+        for line in response.iter_lines():
+            if not line:
+                continue
+            piece = json.loads(line)
+            if piece.get("response"):
+                yield piece["response"]
+            if piece.get("done"):
+                return
+
+
+def is_reachable(timeout: float = 3.0) -> bool:
+    try:
+        return httpx.get(f"{get_ollama_host()}/api/tags", timeout=timeout).status_code == 200
+    except httpx.HTTPError:
+        return False

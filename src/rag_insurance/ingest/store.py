@@ -71,6 +71,8 @@ def to_pgvector(embedding: np.ndarray | list[float]) -> str:
 
 
 def upsert_chunks(conn: psycopg.Connection, chunks: list[Chunk], embeddings: np.ndarray) -> None:
+    """Upsert chunk rows. Does NOT commit — callers own transaction scope
+    (delta ingestion wraps this in an explicit transaction)."""
     if len(chunks) != len(embeddings):
         raise ValueError(f"{len(chunks)} chunks but {len(embeddings)} embeddings")
     with conn.cursor() as cur:
@@ -89,7 +91,6 @@ def upsert_chunks(conn: psycopg.Connection, chunks: list[Chunk], embeddings: np.
                 for chunk, embedding in zip(chunks, embeddings, strict=True)
             ],
         )
-    conn.commit()
 
 
 def stats(conn: psycopg.Connection) -> tuple[int, int]:

@@ -53,7 +53,7 @@ flowchart TD
 | v2 | Evaluation harness + corpus rebalance — golden dataset, retrieval + judge metrics, CI; changes become eval-gated from here | ✅ done |
 | v3 | Retrieval upgrades — hybrid BM25/dense with RRF, bge embeddings, HNSW; structure-chunking and reranking measured and reverted (see NOTES/phase3.md) | ✅ done |
 | v4 | Query rewriting (term expansion) + state filtering + mechanically verified citations with refusal | ✅ done |
-| v5 | Delivery — FastAPI service, Airflow ingestion DAG, full Docker delivery | ⬜ planned |
+| v5 | Delivery — FastAPI service (SSE streaming, startup model loading), Airflow delta-ingestion DAG, Docker delivery | ✅ done |
 | v6 | Agentic layer — LangChain/LangGraph router + query decomposition, with honest latency comparison | ⬜ planned |
 | v7 | Polish — demo UI, final README | ⬜ planned |
 
@@ -84,12 +84,45 @@ eval/             # golden dataset + eval results (added in v2)
 NOTES/            # phase-by-phase learning notes
 ```
 
-## Getting started
+## Quickstart (Docker)
+
+Prereqs: Docker, and [Ollama](https://ollama.com) running natively on the
+host with `ollama pull llama3.1:8b` (Ollama stays outside Docker for GPU
+access; the container reaches it via `host.docker.internal`).
+
+```bash
+docker compose up -d --build     # pgvector + API (HF weights cached in a volume)
+uv run python scripts/download_data.py   # fetch the corpus into data/raw
+curl -X POST localhost:8000/ingest        # parse -> chunk -> embed -> store
+curl -N -X POST localhost:8000/ask \
+  -H 'Content-Type: application/json' \
+  -d '{"question": "Does insurance pay if I hit a deer?"}'
+```
+
+`/ask` streams SSE: `token` events with answer text as it generates, then a
+`final` event with verified citations, retrieved chunks, and a per-stage
+latency breakdown (expand / retrieve / generate). Also: `GET /health`,
+`GET /stats`, and `POST /ingest`.
+
+## Local development (no Docker)
 
 ```bash
 uv sync
 cp .env.example .env
+docker compose up -d db
 uv run python scripts/download_data.py
+uv run rag ingest
+uv run rag ask "Is a cracked windshield collision or comprehensive?"
+uv run uvicorn rag_insurance.api.app:app --reload   # the API, natively
 ```
+
+## Scheduled ingestion (Airflow)
+
+`dags/ingest_dag.py` runs delta ingestion daily: files are hash-compared
+against the `ingest_files` manifest table and only new/changed documents
+are re-parsed, re-embedded, and upserted. Airflow is intentionally not in
+the core dependencies or compose file (see `NOTES/phase5.md`); the DAG
+header documents the `airflow standalone` setup, and the same delta logic
+is importable without Airflow (`rag_insurance.ingest.delta`).
 
 See `PROJECT_STATE.md` for current phase status and next steps.

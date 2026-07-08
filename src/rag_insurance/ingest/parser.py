@@ -89,29 +89,34 @@ def _clean(text: str) -> str:
     return "\n".join(out).strip()
 
 
+def parse_file(path: Path) -> ParsedDocument | None:
+    """Parse one corpus file, or None if it isn't a known/supported document."""
+    meta = BY_FILENAME.get(path.name)
+    if meta is None:
+        print(f"WARN    {path.name} not in manifest, skipping")
+        return None
+    if path.suffix.lower() == ".pdf":
+        text = parse_pdf(path)
+    elif path.suffix.lower() in (".html", ".htm"):
+        text = parse_html(path)
+    else:
+        print(f"WARN    {path.name} has unsupported extension, skipping")
+        return None
+    return ParsedDocument(
+        doc_name=meta.name,
+        state=meta.state,
+        doc_type=meta.doc_type,
+        filename=meta.filename,
+        text=_clean(text),
+    )
+
+
 def parse_corpus(data_dir: Path) -> list[ParsedDocument]:
     documents: list[ParsedDocument] = []
     for path in sorted(data_dir.iterdir()):
         if path.name.startswith("."):
             continue
-        meta = BY_FILENAME.get(path.name)
-        if meta is None:
-            print(f"WARN    {path.name} not in manifest, skipping")
-            continue
-        if path.suffix.lower() == ".pdf":
-            text = parse_pdf(path)
-        elif path.suffix.lower() in (".html", ".htm"):
-            text = parse_html(path)
-        else:
-            print(f"WARN    {path.name} has unsupported extension, skipping")
-            continue
-        documents.append(
-            ParsedDocument(
-                doc_name=meta.name,
-                state=meta.state,
-                doc_type=meta.doc_type,
-                filename=meta.filename,
-                text=_clean(text),
-            )
-        )
+        doc = parse_file(path)
+        if doc is not None:
+            documents.append(doc)
     return documents

@@ -38,7 +38,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/huggingface
-          key: hf-all-MiniLM-L6-v2
+          key: hf-models-v2-bge
 
       - name: Cache corpus
         uses: actions/cache@v4
