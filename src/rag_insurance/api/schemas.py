@@ -2,10 +2,15 @@
 
 from __future__ import annotations
 
+from typing import Literal
+
 from pydantic import BaseModel, Field
 
 
 class EngineOptions(BaseModel):
+    # "pipeline" streams tokens; "langchain"/"agent" run synchronously and
+    # emit only the final SSE event.
+    mode: Literal["pipeline", "langchain", "agent"] = "pipeline"
     rewrite: bool = True
     rerank: bool = False
     dense_only: bool = False

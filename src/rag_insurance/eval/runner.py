@@ -44,6 +44,7 @@ class ItemResult(BaseModel):
     precision_at_k: float | None
     mrr: float | None
     retrieval_ms: float | None = None
+    answer_ms: float | None = None
     answer: str | None = None
     refused: bool | None = None
     citations_valid: int | None = None
@@ -91,6 +92,7 @@ def aggregate(results: list[ItemResult]) -> dict:
             "precision_at_k": _avg([r.precision_at_k for r in subset]),
             "mrr": _avg([r.mrr for r in subset]),
             "retrieval_ms": _avg([r.retrieval_ms for r in subset]),
+            "answer_ms": _avg([r.answer_ms for r in subset]),
             "faithfulness": _avg([r.faithfulness for r in subset]),
             "correctness": _avg([r.correctness for r in subset]),
         }

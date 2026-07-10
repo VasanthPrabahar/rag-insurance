@@ -69,8 +69,57 @@ def _sse(event: str, data: dict) -> str:
     return f"event: {event}\ndata: {json.dumps(data)}\n\n"
 
 
+def _ask_alternate_engine(request: AskRequest) -> Iterator[str]:
+    """langchain/agent modes: synchronous run, single final SSE event."""
+    t_start = time.perf_counter()
+    if request.engine.mode == "agent":
+        from rag_insurance.agent import graph
+
+        state = graph.ask(request.question, k=request.k)
+        verified, chunks = state["answer"], state.get("chunks", [])
+    else:
+        from rag_insurance.agent import chains
+
+        verified, chunks = chains.ask(request.question, k=request.k)
+    total_ms = round((time.perf_counter() - t_start) * 1000, 1)
+    final = AskFinal(
+        answer=verified.answer,
+        refused=verified.refused,
+        forced_refusal=verified.forced_refusal,
+        citations=[
+            Citation(
+                chunk_id=cid,
+                doc_name=chunks[cid - 1].doc_name,
+                chunk_index=chunks[cid - 1].chunk_index,
+                section_path=chunks[cid - 1].section_path,
+            )
+            for cid in verified.citations
+        ],
+        retrieved=[
+            RetrievedChunkMeta(
+                chunk_id=i, doc_name=c.doc_name, chunk_index=c.chunk_index, score=c.score
+            )
+            for i, c in enumerate(chunks, start=1)
+        ],
+        latency=LatencyBreakdown(
+            expand_ms=0.0, retrieve_ms=0.0, generate_ms=0.0, total_ms=total_ms
+        ),
+    )
+    log.info(
+        "ask",
+        engine=request.engine.mode,
+        question=request.question[:120],
+        refused=verified.refused,
+        total_ms=total_ms,
+    )
+    yield _sse("final", final.model_dump())
+
+
 @app.post("/ask")
 def ask(request: AskRequest) -> StreamingResponse:
+    if request.engine.mode != "pipeline":
+        return StreamingResponse(_ask_alternate_engine(request), media_type="text/event-stream")
+
     def event_stream() -> Iterator[str]:
         t_start = time.perf_counter()
 

@@ -44,6 +44,27 @@ flowchart TD
     F -.-> H2
 ```
 
+### Agentic layer (v6, optional engine)
+
+The LangGraph router wraps the same pipeline — `--engine agent` on the CLI,
+`engine.mode` on the API. Out-of-scope questions refuse before any
+retrieval or generation; multi-part questions decompose into focused
+sub-questions whose union of evidence feeds one cited answer.
+
+```mermaid
+flowchart TD
+    Q[User query] --> RT{Router\n1 fast LLM call}
+    RT -->|policy_lookup| STD[Standard pipeline\nexpand -> hybrid -> generate]
+    RT -->|state_law| STD
+    RT -->|multi_part| DC[Decompose\n<=3 sub-questions]
+    DC --> MR[Retrieve per sub-question\nunion + dedup]
+    MR --> SY[Synthesize one\ncited answer]
+    RT -->|out_of_scope| RF[Refuse\nno retrieval, no generation]
+    STD --> OUT[Answer + verified citations]
+    SY --> OUT
+    RF --> OUT
+```
+
 ## Phases
 
 | Phase | Name | Status |
@@ -54,7 +75,7 @@ flowchart TD
 | v3 | Retrieval upgrades — hybrid BM25/dense with RRF, bge embeddings, HNSW; structure-chunking and reranking measured and reverted (see NOTES/phase3.md) | ✅ done |
 | v4 | Query rewriting (term expansion) + state filtering + mechanically verified citations with refusal | ✅ done |
 | v5 | Delivery — FastAPI service (SSE streaming, startup model loading), Airflow delta-ingestion DAG, Docker delivery | ✅ done |
-| v6 | Agentic layer — LangChain/LangGraph router + query decomposition, with honest latency comparison | ⬜ planned |
+| v6 | Agentic layer — LCEL chain + LangGraph router (decomposition, refusal short-circuit), measured against the direct pipeline | ✅ done |
 | v7 | Polish — demo UI, final README | ⬜ planned |
 
 ## Design decisions

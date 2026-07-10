@@ -50,18 +50,34 @@ def ask(
     rewrite: bool = typer.Option(
         True, "--rewrite/--no-rewrite", help="Policy-register query rewriting via Ollama"
     ),
+    engine: str = typer.Option(
+        "pipeline", "--engine", help="pipeline (direct) | langchain (LCEL) | agent (LangGraph)"
+    ),
 ) -> None:
     """Answer a question from the ingested corpus."""
     from rag_insurance.generation.answer import grounded_answer
     from rag_insurance.ingest import store
     from rag_insurance.retrieval.hybrid import search
 
-    with store.connect() as conn:
-        chunks = search(
-            conn, question, k=k, dense_only=dense_only, use_rerank=rerank, use_rewrite=rewrite
-        )
+    if engine == "langchain":
+        from rag_insurance.agent import chains
 
-    verified = grounded_answer(question, chunks)
+        verified, chunks = chains.ask(question, k=k)
+    elif engine == "agent":
+        from rag_insurance.agent import graph
+
+        state = graph.ask(question, k=k)
+        verified, chunks = state["answer"], state["chunks"]
+        typer.echo("--- Agent trace ---")
+        for entry in state.get("node_log", []):
+            typer.echo(f"  {entry}")
+        typer.echo("")
+    else:
+        with store.connect() as conn:
+            chunks = search(
+                conn, question, k=k, dense_only=dense_only, use_rerank=rerank, use_rewrite=rewrite
+            )
+        verified = grounded_answer(question, chunks)
     typer.echo(verified.answer)
     if verified.citations:
         typer.echo("\nCitations:")
@@ -95,6 +111,10 @@ def eval(
     rewrite: bool = typer.Option(
         True, "--rewrite/--no-rewrite", help="Policy-register query rewriting via Ollama"
     ),
+    engine: str = typer.Option("pipeline", "--engine", help="pipeline | agent"),
+    category: str = typer.Option(
+        None, "--category", help="Only evaluate items in this category (e.g. multi_hop)"
+    ),
 ) -> None:
     """Run the golden-set evaluation."""
     from rag_insurance.eval import runner
@@ -104,27 +124,50 @@ def eval(
     from rag_insurance.retrieval.hybrid import search
 
     items = runner.load_golden_set()
+    if category:
+        items = [i for i in items if i.category == category]
     results = []
     with store.connect() as conn:
         for item in items:
-            t0 = time.perf_counter()
-            chunks = search(
-                conn,
-                item.question,
-                k=k,
-                dense_only=dense_only,
-                use_rerank=rerank,
-                use_rewrite=rewrite,
-            )
-            elapsed_ms = (time.perf_counter() - t0) * 1000
+            verified = None
+            if engine == "agent":
+                from rag_insurance.agent import graph
+
+                t0 = time.perf_counter()
+                if skip_llm:
+                    state = graph.retrieve_only(item.question, k=k)
+                else:
+                    state = graph.ask(item.question, k=k)
+                    verified = state["answer"]
+                chunks = state.get("chunks", [])
+                node_log = state.get("node_log", [])
+                gen_ms = sum(e["ms"] for e in node_log if e["node"] in ("generate", "synthesize"))
+                elapsed_ms = (time.perf_counter() - t0) * 1000 - gen_ms
+                answer_ms = gen_ms
+            else:
+                t0 = time.perf_counter()
+                chunks = search(
+                    conn,
+                    item.question,
+                    k=k,
+                    dense_only=dense_only,
+                    use_rerank=rerank,
+                    use_rewrite=rewrite,
+                )
+                elapsed_ms = (time.perf_counter() - t0) * 1000
+                answer_ms = None
             result = runner.score_retrieval(item, chunks, k)
             result.retrieval_ms = round(elapsed_ms, 1)
+            result.answer_ms = round(answer_ms, 1) if answer_ms else None
             result.retrieved = [
                 {"doc_name": c.doc_name, "chunk_index": c.chunk_index, "score": round(c.score, 4)}
                 for c in chunks
             ]
             if not skip_llm:
-                verified = grounded_answer(item.question, chunks)
+                if verified is None:
+                    t_gen = time.perf_counter()
+                    verified = grounded_answer(item.question, chunks)
+                    result.answer_ms = round((time.perf_counter() - t_gen) * 1000, 1)
                 result.answer = verified.answer
                 result.refused = verified.refused
                 result.citations_valid = len(verified.citations)

@@ -4,7 +4,7 @@ _Update this file at the end of every phase._
 
 ## Current phase
 
-**v5 — Production service + ingestion pipeline** (complete)
+**v6 — Framework + agentic layer** (complete)
 
 ## Phase plan
 
@@ -118,11 +118,31 @@ delta before landing.
   citation-verification unit, chunker/metrics/roundtrip); CI needs no Ollama
 - No retrieval changes; v5-final eval row confirms no regression
 
-## Next steps (v6 — Agentic layer)
+### v6 — Framework + agentic layer (see NOTES/phase6.md)
+- LCEL chain (`agent/chains.py`): our functions as runnables, framework
+  orchestrates only; `--engine langchain`
+- LangGraph router (`agent/graph.py`): policy_lookup | state_law |
+  multi_part (decompose ≤3, union retrieve, cited synthesis) |
+  out_of_scope (refuse with NO retrieval/generation); fallback-first
+  robustness (malformed/down → full pipeline); per-node trace in state,
+  logged via structlog; `--engine agent`, API `engine.mode`
+- Measured: retrieval quality identical (0.769/0.578 both engines; 26/30
+  route standard); real wins are architectural — oos refusal ~1s vs ~14s,
+  and decomposition incidentally fixes the g19 focused-query ranking
+- Judged multi_hop table recorded WITH its confounds: quality delta =
+  judge variance on near-identical answers (A/A demonstration), 5x
+  answer-latency delta = Ollama prompt cache from run order — both called
+  out explicitly in NOTES/phase6.md
+- Router audit: 3/4 oos short-circuited, g28 defensibly in-domain, zero
+  false refusals; golden set lacks a true multi-part item (flagged for
+  next revision)
+- Langfuse deferred (v3 self-host heavier than the app; structlog +
+  node_log suffice)
 
-- LangChain/LangGraph router + query decomposition
-- Honest latency comparison agentic vs direct pipeline (structlog data is
-  in place)
+## Next steps (v7 — Polish)
+
+- Demo UI, final README pass
+- Golden-set revision: add a true multi-part item, revisit g27's label
 - Open retrieval items still carried: g02 (targeted structure-chunking of
   insuring agreements), keyword-density noise (doc-type priors or
   bge-reranker), longer-context reranker revisit

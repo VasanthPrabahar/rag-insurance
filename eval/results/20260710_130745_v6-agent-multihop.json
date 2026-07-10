@@ -1,0 +1,295 @@
+{
+  "tag": "v6-agent-multihop",
+  "timestamp": "20260710_130745",
+  "k": 5,
+  "skip_llm": false,
+  "summary": {
+    "overall": {
+      "n": 6,
+      "recall_at_k": 0.8333,
+      "precision_at_k": 0.2333,
+      "mrr": 0.4917,
+      "retrieval_ms": 2997.8167,
+      "answer_ms": 3101.55,
+      "faithfulness": 0.8167,
+      "correctness": 0.7
+    },
+    "per_category": {
+      "multi_hop": {
+        "n": 6,
+        "recall_at_k": 0.8333,
+        "precision_at_k": 0.2333,
+        "mrr": 0.4917,
+        "retrieval_ms": 2997.8167,
+        "answer_ms": 3101.55,
+        "faithfulness": 0.8167,
+        "correctness": 0.7
+      }
+    },
+    "citation_verification": {
+      "valid": 7,
+      "dropped": 0,
+      "forced_refusals": 0
+    }
+  },
+  "items": [
+    {
+      "id": "g13",
+      "category": "multi_hop",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "retrieval_ms": 6637.9,
+      "answer_ms": 4129.9,
+      "answer": "Coverage for temporary transportation expenses starts 48 hours after theft, up to a maximum of $600, with a daily limit of $20.",
+      "refused": false,
+      "citations_valid": 1,
+      "citations_dropped": 0,
+      "forced_refusal": false,
+      "faithfulness": 0.8,
+      "correctness": 0.7,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 14,
+          "score": 0.0328
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 1,
+          "score": 0.0317
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": 0.0313
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 2,
+          "score": 0.0306
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": 0.0299
+        }
+      ]
+    },
+    {
+      "id": "g14",
+      "category": "multi_hop",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.2,
+      "retrieval_ms": 2780.6,
+      "answer_ms": 4399.6,
+      "answer": "Yes, the loaner car is likely covered under your policy as a 'non-owned auto' since it's being used as a temporary substitute for your own car that's out of normal use due to repair.",
+      "refused": false,
+      "citations_valid": 1,
+      "citations_dropped": 0,
+      "forced_refusal": false,
+      "faithfulness": 0.8,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 2,
+          "score": 0.0317
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 6,
+          "score": 0.0313
+        },
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 11,
+          "score": 0.0311
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 1,
+          "score": 0.0308
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 14,
+          "score": 0.0299
+        }
+      ]
+    },
+    {
+      "id": "g15",
+      "category": "multi_hop",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.25,
+      "retrieval_ms": 2367.2,
+      "answer_ms": 3030.5,
+      "answer": "Yes, your uninsured motorist coverage applies because the at-fault driver's insurance company is insolvent [4].",
+      "refused": false,
+      "citations_valid": 1,
+      "citations_dropped": 0,
+      "forced_refusal": false,
+      "faithfulness": 0.8,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Consumer's Guide to Auto Insurance",
+          "chunk_index": 6,
+          "score": 0.0325
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 12,
+          "score": 0.0323
+        },
+        {
+          "doc_name": "CA Automobile Insurance Consumer Guide (2025)",
+          "chunk_index": 4,
+          "score": 0.032
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 10,
+          "score": 0.0312
+        },
+        {
+          "doc_name": "TX Automobile Insurance Guide (cb020)",
+          "chunk_index": 1,
+          "score": 0.0303
+        }
+      ]
+    },
+    {
+      "id": "g16",
+      "category": "multi_hop",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "retrieval_ms": 1755.0,
+      "answer_ms": 2984.1,
+      "answer": "Your custom equipment, including your aftermarket stereo, may be covered under comprehensive coverage, but the most we will pay for loss to any 'non-owned auto' which is a trailer is $500.",
+      "refused": false,
+      "citations_valid": 1,
+      "citations_dropped": 0,
+      "forced_refusal": false,
+      "faithfulness": 0.5,
+      "correctness": 0.0,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 15,
+          "score": 0.0323
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 17,
+          "score": 0.0313
+        },
+        {
+          "doc_name": "CA Shopping for Auto Insurance Guide",
+          "chunk_index": 0,
+          "score": 0.0307
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 7,
+          "score": 0.0302
+        },
+        {
+          "doc_name": "NAIC Consumer Shopping Tool for Auto Insurance",
+          "chunk_index": 4,
+          "score": 0.0301
+        }
+      ]
+    },
+    {
+      "id": "g17",
+      "category": "multi_hop",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "retrieval_ms": 2073.8,
+      "answer_ms": 2117.5,
+      "answer": "The higher specified limit for 'bodily injury' or 'property damage' applies.",
+      "refused": false,
+      "citations_valid": 2,
+      "citations_dropped": 0,
+      "forced_refusal": false,
+      "faithfulness": 1.0,
+      "correctness": 0.5,
+      "retrieved": [
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 6,
+          "score": 0.0318
+        },
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 3,
+          "score": 0.0318
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 11,
+          "score": 0.0318
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 12,
+          "score": 0.0317
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 6,
+          "score": 0.0306
+        }
+      ]
+    },
+    {
+      "id": "g18",
+      "category": "multi_hop",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 0.5,
+      "retrieval_ms": 2372.4,
+      "answer_ms": 1947.7,
+      "answer": "No, you can't collect under both policies for a single accident.",
+      "refused": false,
+      "citations_valid": 1,
+      "citations_dropped": 0,
+      "forced_refusal": false,
+      "faithfulness": 1.0,
+      "correctness": 1.0,
+      "retrieved": [
+        {
+          "doc_name": "NAIC A Shopping Tool for Auto Insurance",
+          "chunk_index": 10,
+          "score": 0.0323
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 23,
+          "score": 0.0309
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 11,
+          "score": 0.0308
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)",
+          "chunk_index": 11,
+          "score": 0.0308
+        },
+        {
+          "doc_name": "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)",
+          "chunk_index": 2,
+          "score": 0.0302
+        }
+      ]
+    }
+  ]
+}
