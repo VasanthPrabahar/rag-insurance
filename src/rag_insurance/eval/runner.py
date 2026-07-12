@@ -33,6 +33,7 @@ class GoldenItem(BaseModel):
     ground_truth_answer: str
     relevant_doc_names: list[str]
     relevant_hint: str | None
+    relevant_hints: list[str] | None = None  # multi-part items: one hint per part
     category: Category
     state: str | None
 
@@ -69,11 +70,24 @@ def score_retrieval(item: GoldenItem, chunks: list[RetrievedChunk], k: int) -> I
         return ItemResult(
             id=item.id, category=item.category, recall_at_k=None, precision_at_k=None, mrr=None
         )
-    flags = metrics.relevance_flags(chunks, item.relevant_doc_names, item.relevant_hint)
+    if item.relevant_hints:
+        # Multi-part item: recall is hint coverage; precision/MRR use
+        # any-hint relevance per chunk.
+        per_hint = [
+            metrics.relevance_flags(chunks, item.relevant_doc_names, hint)
+            for hint in item.relevant_hints
+        ]
+        flags = [any(col) for col in zip(*per_hint, strict=True)] if per_hint else []
+        recall = metrics.multi_hint_recall_at_k(
+            chunks, item.relevant_doc_names, item.relevant_hints, k
+        )
+    else:
+        flags = metrics.relevance_flags(chunks, item.relevant_doc_names, item.relevant_hint)
+        recall = metrics.recall_at_k(flags, k)
     return ItemResult(
         id=item.id,
         category=item.category,
-        recall_at_k=metrics.recall_at_k(flags, k),
+        recall_at_k=recall,
         precision_at_k=metrics.precision_at_k(flags, k),
         mrr=metrics.mrr(flags),
     )

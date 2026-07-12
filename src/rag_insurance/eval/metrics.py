@@ -36,6 +36,21 @@ def recall_at_k(flags: list[bool], k: int) -> float:
     return 1.0 if any(flags[:k]) else 0.0
 
 
+def multi_hint_recall_at_k(
+    chunks: list[RetrievedChunk],
+    relevant_doc_names: list[str],
+    hints: list[str],
+    k: int,
+) -> float:
+    """For multi-part questions: fraction of evidence hints covered in the
+    top k. Finding evidence for one part of a two-part question is 0.5
+    recall, not 1.0 — hit@k would over-credit partial evidence."""
+    if not hints:
+        return 0.0
+    covered = sum(1 for hint in hints if any(relevance_flags(chunks[:k], relevant_doc_names, hint)))
+    return covered / len(hints)
+
+
 def precision_at_k(flags: list[bool], k: int) -> float:
     if k <= 0:
         return 0.0

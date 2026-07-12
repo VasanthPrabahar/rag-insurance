@@ -97,7 +97,11 @@ def _ask_alternate_engine(request: AskRequest) -> Iterator[str]:
         ],
         retrieved=[
             RetrievedChunkMeta(
-                chunk_id=i, doc_name=c.doc_name, chunk_index=c.chunk_index, score=c.score
+                chunk_id=i,
+                doc_name=c.doc_name,
+                chunk_index=c.chunk_index,
+                score=c.score,
+                content=c.content,
             )
             for i, c in enumerate(chunks, start=1)
         ],
@@ -179,7 +183,11 @@ def ask(request: AskRequest) -> StreamingResponse:
             ],
             retrieved=[
                 RetrievedChunkMeta(
-                    chunk_id=i, doc_name=c.doc_name, chunk_index=c.chunk_index, score=c.score
+                    chunk_id=i,
+                    doc_name=c.doc_name,
+                    chunk_index=c.chunk_index,
+                    score=c.score,
+                    content=c.content,
                 )
                 for i, c in enumerate(chunks, start=1)
             ],

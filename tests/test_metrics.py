@@ -42,3 +42,20 @@ def test_mrr():
     assert mrr([False, True, False]) == 0.5
     assert mrr([True]) == 1.0
     assert mrr([False, False]) == 0.0
+
+
+def test_multi_hint_recall_is_coverage():
+    from rag_insurance.eval.metrics import multi_hint_recall_at_k
+
+    chunks = [
+        make_chunk("Doc A", "you could be fined between $500 and $1,000"),
+        make_chunk("Doc B", "hail, water or flood are other than collision"),
+        make_chunk("Doc A", "unrelated text"),
+    ]
+    docs = ["Doc A", "Doc B"]
+    # both hints covered
+    assert multi_hint_recall_at_k(chunks, docs, ["fined between $500", "hail"], 3) == 1.0
+    # only one of two covered within k=1
+    assert multi_hint_recall_at_k(chunks, docs, ["fined between $500", "hail"], 1) == 0.5
+    # neither covered
+    assert multi_hint_recall_at_k(chunks, docs, ["nowhere"], 3) == 0.0

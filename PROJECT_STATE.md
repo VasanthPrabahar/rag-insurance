@@ -4,7 +4,7 @@ _Update this file at the end of every phase._
 
 ## Current phase
 
-**v6 — Framework + agentic layer** (complete)
+**v1.0 — COMPLETE** (all seven phases shipped; v7-final tagged)
 
 ## Phase plan
 
@@ -139,13 +139,26 @@ delta before landing.
 - Langfuse deferred (v3 self-host heavier than the app; structlog +
   node_log suffice)
 
-## Next steps (v7 — Polish)
+### v7 — Golden-set revision, demo, final documentation (see NOTES/phase7.md)
+- Golden set → 32 items: g27 relabeled in-domain (grounded shop-around
+  answer), g31/g32 added as true multi-part questions with multi-doc
+  evidence; metrics extended with hint-coverage recall for multi-part items
+- Revised-set results: pipeline 0.776/0.594 now BEATS agent 0.741/0.570 —
+  the router still refuses the relabeled g27 (judgment baked into its
+  prompt); decompose ran for real on g31/g32 and bought no recall at 3-5x
+  retrieval latency. All reported as-is
+- Streamlit demo (demo/app.py): SSE streaming chat, citation expanders
+  with chunk text, state dropdown, engine toggle; DEMO_SCRIPT.md storyboard
+- README final pass: hero numbers, results ladder, design decisions,
+  failure museum, limitations; NOTES/INDEX.md study guide
 
-- Demo UI, final README pass
-- Golden-set revision: add a true multi-part item, revisit g27's label
-- Open retrieval items still carried: g02 (targeted structure-chunking of
-  insuring agreements), keyword-density noise (doc-type priors or
-  bge-reranker), longer-context reranker revisit
+## Future work (carried out of v1.0, priority order)
+
+1. Targeted structure-chunking of ISO insuring agreements (the g02 fix)
+2. Longer-context reranker (bge-reranker-base)
+3. Larger judge model (shrink the ~0.05 noise floor)
+4. Router prompt / golden-set alignment (the g27 coupling)
+5. Doc-type priors for keyword-density noise
 
 ## Key decisions
 

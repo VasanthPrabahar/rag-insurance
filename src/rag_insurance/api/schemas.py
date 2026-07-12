@@ -39,6 +39,7 @@ class RetrievedChunkMeta(BaseModel):
     doc_name: str
     chunk_index: int
     score: float
+    content: str = ""  # chunk text, so clients can render sources
 
 
 class LatencyBreakdown(BaseModel):

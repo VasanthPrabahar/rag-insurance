@@ -28,3 +28,5 @@ One row per eval run. Retrieval metrics exclude out_of_scope items.
 | v6-agent-retrieval | 2026-07-10 | 0.769 | 0.578 | — | — |
 | v6-pipeline-multihop | 2026-07-10 | 0.833 | 0.492 | 0.700 | 0.633 |
 | v6-agent-multihop | 2026-07-10 | 0.833 | 0.492 | 0.817 | 0.700 |
+| v7-pipeline-revised | 2026-07-11 | 0.776 | 0.594 | — | — |
+| v7-agent-revised | 2026-07-11 | 0.741 | 0.570 | — | — |

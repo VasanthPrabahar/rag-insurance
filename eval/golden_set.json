@@ -238,10 +238,10 @@
     {
       "id": "g27",
       "question": "Which auto insurance company is the best one to buy from?",
-      "ground_truth_answer": "REFUSAL — the corpus explains how to compare companies but does not (and cannot) name a best company.",
-      "relevant_doc_names": [],
-      "relevant_hint": null,
-      "category": "out_of_scope",
+      "ground_truth_answer": "There is no single best company — premiums for identical coverage vary widely between insurers because each uses different rating factors, so you should shop around: get quotes from several companies, compare coverage and price, and check each company's complaint record and license status. (Relabeled in v7: originally out_of_scope expecting refusal; the corpus in fact grounds this shop-around answer.)",
+      "relevant_doc_names": ["NAIC A Shopping Tool for Auto Insurance", "AZ New Driver's Guide to Auto Insurance"],
+      "relevant_hint": "shop around",
+      "category": "lookup",
       "state": null
     },
     {
@@ -270,6 +270,26 @@
       "relevant_hint": "material misrepresentation",
       "category": "adversarial",
       "state": null
+    },
+    {
+      "id": "g31",
+      "question": "What are the Arizona penalties for driving uninsured, and does comprehensive coverage pay for hail damage?",
+      "ground_truth_answer": "Two parts: (1) In Arizona, driving uninsured can mean a fine between $500 and $1,000, suspension of your registration and driver's license, and impoundment of your vehicle. (2) Yes — hail is a loss considered 'other than collision', so comprehensive (other-than-collision) coverage pays for hail damage.",
+      "relevant_doc_names": ["AZ New Driver's Guide to Auto Insurance", "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)", "NAIC A Consumer's Guide to Auto Insurance"],
+      "relevant_hint": null,
+      "relevant_hints": ["fined between $500 and $1,000", "hail"],
+      "category": "multi_hop",
+      "state": "AZ"
+    },
+    {
+      "id": "g32",
+      "question": "Who qualifies as a Good Driver in California, and how much does a personal auto policy pay toward bail bonds after an accident?",
+      "ground_truth_answer": "Two parts: (1) A California Good Driver has been licensed at least three consecutive years with no more than one point on their record, and must be offered rates at least 20% below a non-Good Driver's. (2) The ISO personal auto policy pays up to $250 for bail bonds required because of a covered accident, as a supplementary payment in addition to the liability limit.",
+      "relevant_doc_names": ["CA Automobile Insurance Consumer Guide (2025)", "ISO Personal Auto Policy specimen PP 00 01 06 98 (Nevada DOI)", "ISO Personal Auto Policy specimen PP 00 01 09 18 (Virginia SCC)"],
+      "relevant_hint": null,
+      "relevant_hints": ["licensed for at least three consecutive years", "bail bonds"],
+      "category": "multi_hop",
+      "state": "CA"
     }
   ]
 }
