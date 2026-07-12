@@ -1,6 +1,6 @@
 # Project State
 
-_Update this file at the end of every phase._
+_This file gets updated at the end of every single phase._
 
 ## Current phase
 
