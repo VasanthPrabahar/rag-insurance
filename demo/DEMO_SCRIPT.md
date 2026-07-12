@@ -1,11 +1,14 @@
 # Demo GIF storyboard — 3 beats, ~30 seconds
 
 Setup: `docker compose up -d`, corpus ingested, Ollama running,
-`uv run --group demo streamlit run demo/app.py`. Sidebar visible.
+`uv run --group demo streamlit run demo/app.py`. Sidebar visible; the
+example-question chips under the header are on screen at the start (they
+disappear once the conversation begins — open with them in frame).
 
 ## Beat 1 — Cited answer (pipeline engine)
 
-Type: **"Does insurance pay if I hit a deer?"**
+Click the chip: **"Does comprehensive cover hitting a deer?"**
+(or type the deer question)
 Show: tokens streaming live, then the latency caption, then click open a
 citation expander to reveal the actual ISO policy text ("contact with bird
 or animal" under other-than-collision). The point on screen: the answer
@@ -15,10 +18,11 @@ and its evidence, side by side, citation mechanically verified.
 
 Flip the sidebar engine toggle to **agent**.
 Type: **"What does boat insurance cover?"**
-Show: near-instant refusal — caption reads well under 2s and "refused".
-The point: the router saw out-of-scope and never spent retrieval or a
-14-second generation on it. (Contrast is the whole beat: deer question
-took ~15s of honest work; boat question took ~1s of honest refusal.)
+Show: near-instant refusal rendered as an info box (blue), with the
+"Searching the corpus…" status barely flashing. The point: the router saw
+out-of-scope and never spent retrieval or a 14-second generation on it.
+(Contrast is the whole beat: deer question took ~15s of honest work; boat
+question took ~1s of honest refusal.)
 
 ## Beat 3 — State filter (AZ question)
 
@@ -32,3 +36,6 @@ grounds in the right state's document.
 
 Recording notes: 1280×800 window, hide browser chrome, ~2s pause on each
 opened expander, no cuts inside token streaming (the stream IS the demo).
+The latency caption under each answer (expand/retrieve/generate ms) is
+worth a beat of hover on Beat 1 — it's the "measured at every step" story
+in one line.
